@@ -1,0 +1,14 @@
+*.fls
+*.gz
+*.aux
+*.log
+*.png
+*.fls
+*.fdb_latexmk
+*.jpg
+*.mp4
+*.mov
+*.nav
+*.out
+*.toc
+*.directory
