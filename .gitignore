@@ -9,3 +9,10 @@
 *.png
 *.jpg
 *.mp4
+
+*.out
+*.thm
+*.nav
+*.snm
+*.toc
+*.gz(busy)
