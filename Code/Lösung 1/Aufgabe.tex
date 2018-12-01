@@ -1,0 +1,74 @@
+\documentclass[12pt, a4paper]{article}
+ 
+\usepackage[top=0.5in, bottom=0.9in, left=0.95in, right=0.95in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{harpoon}
+
+\newcommand{\vect}[1]{\overrightharp{\ensuremath{#1}}}
+\newcommand{\field}[1]{\par\begin{large}{\vspace*{0.5cm}\noindent{}\textbf{#1}\vspace*{-1mm}}\end{large}}
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+%\newcommand{\problem}[2]{{\par\noindent{}\textit{Problem {\uppercase\expandafter{\romannumeral #1\relax}}.} #2}}
+\newenvironment{problem}[3]{{\par\vspace*{4.5mm}\noindent{}\textit{Problem {\uppercase\expandafter{\romannumeral #1\relax}}:} #2}\vspace*{-0.2cm}\hfill{\textit{{#3} Points.}}\\\hspace*{0.8cm}\hfill\begin{minipage}{\dimexpr\textwidth-1.3cm}}{\end{minipage}\hspace*{0.5cm}}
+% don't fucking ask! (im 4h into this and it __works__)
+ 
+\lstset{literate=
+  {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {ß}{{\ss}}1
+}
+
+\begin{document}
+\title{Problem \rom{1} - Commutative Exponentiation}
+\author{Philip Gei\ss{}ler \hspace{5cm} \textit{3 Points}}
+\date{}
+\maketitle
+\vspace*{-.9cm}
+
+\begin{align*}
+p^q &= q^p & p,q\in\mathbb{R}^+
+\end{align*}
+Find the functions $p(q)$ which satisfy the given equation. Where $(p,q)$ do they intersect?
+\hrule
+\vspace*{9mm}
+
+\begin{align*}
+p^p &= p^p & p,q\in\mathbb{R}^+\\
+p^q &= q^p &\text{~~with~} q = p = p(q)
+\end{align*}
+\vspace*{-1cm}
+\begin{align}
+\Rightarrow p_1(q) &= q\\
+p_1(c) &= c \text{~~and~~} q_1(c) = c
+\end{align}
+
+If $p(q)=q$, then obviously $p(q)^q = p^p = q^{p(q)}$.
+But $2^4 = 4^2$ and $2 \neq 4$, so what if $p \neq q$?
+\begin{align*}
+p &\neq q & p,q\in\mathbb{R}^+\\
+\Rightarrow p(q) &= c\cdot q & c\in \mathbb{R}^+\setminus{1}\\~\\
+q^{p(q)} = (cq)^q &= \left(q^c\right)^q= q^{cq} = p(q)^q\\
+c\cdot q &= q^c\\
+c &= q^{c-1}\\
+c^\frac{1}{c-1} &= q = q(c)
+\end{align*}
+\vspace*{-1cm}
+\begin{align}
+\Rightarrow p_2(c) &= c\cdot c^\frac{1}{c-1} = c^\frac{c}{c-1}\text{~~and~~} q_2(c) = c^\frac{1}{c-1}
+\end{align} 
+We know from (1) that $p=q$ in the first function, so to get the intersection of the 2 possible functions, we would just set $c=1$, but both fnctions are undefined in that case. So instead we are looking at limit of c going to 1. 
+\begin{align*}
+\lim_{c\rightarrow 1} p_2(x) &= \lim_{c\rightarrow 1} c\cdot \lim_{c\rightarrow 1} c^\frac{1}{c-1} = 1 \cdot \lim_{c\rightarrow 1} c^\frac{1}{c-1} = \lim_{c\rightarrow 1} q_2(c)\\
+& = \lim_{c\rightarrow 1} e^{\log{c^\frac{1}{c-1}}} = \lim_{c\rightarrow 1} e^{\frac{1}{c-1}\log{c}}\\
+ &= e^{\lim\limits_{c\rightarrow 1} \frac{\log(c)}{c-1}} = e^{\lim\limits_{c\rightarrow 1} \frac{1}{c}}\\
+ &= e^1 = e
+\end{align*}
+\begin{align}
+\Rightarrow P_i = (e,e) \approx (2.71,\,2.71)
+\end{align}
+\end{document}
+
+
+ 
