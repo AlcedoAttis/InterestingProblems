@@ -1,0 +1,9 @@
+\select@language {english}
+\contentsline {section}{An Introduction to ``Lemmings''}
+\beamer@sectionintoc {1}{Formalization}{5}{0}{1}
+\beamer@subsectionintoc {1}{1}{3SAT tangent}{8}{0}{1}
+\beamer@sectionintoc {2}{Complexity Proofs}{9}{0}{2}
+\beamer@subsectionintoc {2}{1}{NP}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{NP - Hard}{12}{0}{2}
+\beamer@subsectionintoc {2}{3}{NP - Complete}{18}{0}{2}
+\beamer@sectionintoc {3}{Sources}{19}{0}{3}
