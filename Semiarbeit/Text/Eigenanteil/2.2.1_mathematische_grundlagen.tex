@@ -1,0 +1,160 @@
+\documentclass[12pt]{report} 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{braket}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\def\arraystretch{1.5}    %nicht
+\setlength{\parskip}{0pt} %kaputtmachen	
+\begin{document}
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+
+\subsection{Mathematische Grundlagen}					% 2.2.1
+\subsubsection{Zustände eines einzelnen Qubits}			% 2.2.1.1
+	Im rein mathematischen Sinne ist ein Qubit durch ein System mit einem Zustand $\ket{\psi_{1}}$ als Kombination der Eigenzustände $\ket{0}$ und $\ket{1}$ definiert. Es weist deshalb folgende zwei Eigenschaften auf\footnote{David Terr, o.J, S.1}:
+	\begin{align}
+	\ket{\psi_{1}} &= \alpha\ket{0} + \beta\ket{1} & \alpha,\beta \in \mathbb{C}\\
+	\begin{split}
+		1 &= \vert \alpha \vert^2 + \vert \beta \vert^2 \\
+		  &= \alpha\bar{\alpha} + \beta\bar{\beta} \\
+		  &= (\Re(\alpha)+i\Im(\alpha))\cdot(\Re(\alpha)-i\Im(\alpha)) + (\Re(\beta)+i\Im(\beta))\cdot(\Re(\beta)-i\Im(\beta)) \\
+		  &= \Re(\alpha)^2+\Im(\alpha)^2+\Re(\beta)^2+\Im(\beta)^2
+	\end{split}
+	\end{align}
+	Hierbei geben $\alpha$ und $\beta$ die sogenannten Amplituden des Ein-Qubit Systems an. Nimmt man von einem der beiden Werte das Betragsquadrat, so erhält man die Wahrscheinlichkeit für das Auftreten des korrespondierenden Grundzustandes. Es besteht eine Eindeutigkeit des Vorganges in Richtung der Wahrscheinlichkeiten, eine Eineindeutigkeit ist jedoch nicht mehr gegeben. Denn eine gemessene Wahrscheinlichkeit $p$ für den Grundzustand $\ket{0}$ des Ein-Qubit Systems kann allein im reellen Zahlenbereich vier mögliche Anfangsgesamtzustände besitzen. Für einen komplexen Zahlenbereich erweitert sich die Anzahl der Gesamtzustände ins Unendliche. 
+	\begin{align*}
+	\vert \alpha \vert^2 &= p & \vert \beta \vert^2 &= 1-p & \alpha,\beta \in \mathbb{R}\\
+	\alpha^2 &= p & \beta^2 &= 1-p \\
+	\alpha &= \pm\sqrt{p} & \beta &= \pm\sqrt{1-p} \\
+	\Rightarrow \ket{\psi_{1}} &= \pm\sqrt{p}\ket{0} \pm\sqrt{1-p}\ket{1}\\\\
+	\vert \alpha \vert^2 &= p & \vert \beta \vert^2 &= 1-p & \alpha,\beta \in \mathbb{C}\\
+	\Re(\alpha)^2+\Im(\alpha)^2 &= p & \Re(\beta)^2+\Im(\beta)^2 &= 1-p\\
+	\Rightarrow \alpha \text{ ist}&\text{ nicht einschränkbar} & \Rightarrow \beta \text{ ist}&\text{ nicht einschränkbar}
+	\end{align*}
+	
+\subsubsection{Matrixdarstellung des Qubitzustandes}		% 2.2.1.2
+	Durch die fehlende Eineindeutigkeit entwickelt sich eine Ungewissheit über den Zustand des Qubits, welchen man bewiesenermaßen nicht durch Messergebnisse ermitteln kann.\\
+	Man kann ihn jedoch nach einer beliebigen Anzahl von eindeutigen, zustandsverändernden Einwirkungen berechnen. Es bietet sich hierbei an, die Grundzustände als zweidimensionale Vektoren zu betrachten, aus denen sich ein zweidimensional komplexer Zustandsvektor bilden lässt. Will man diesen Vektor darstellen, so benötigt man 4 Koordinatenachsen. 
+	\begin{align*} \vert \mathbb{C}^2 \vert = \vert \mathbb{R}^4 \vert \end{align*}
+Sind $\alpha$ und $\beta$ jedoch reell, so reicht eine zweidimensionale Darstellung aus.
+	\begin{align*}  \alpha = a_1+0*i \wedge \beta = a_2+0*i \qquad \Rightarrow \ket{\psi} \in \mathbb{R}^2 
+	\end{align*}
+	
+	\begin{figure}
+		\centering
+		\begin{subfigure}{.29\textwidth}
+		\centering
+  		\includegraphics[width=1.09\linewidth]{2d_grundvektoren.png}
+ 	 	\caption{$\ket{\psi_{1}} = 0.84\ket{0} + 0.55\ket{1}$}
+		\end{subfigure}
+		\begin{subfigure}{.7\textwidth}
+  		\centering
+ 	 	\includegraphics[width=0.95\linewidth]{4d_grundvektoren.png}
+ 	 	\caption{$\ket{\psi_{1}} = (0.84+0.32i)\ket{0} + (0.32+0.32i)\ket{1}$}
+		\end{subfigure}
+		\caption[Caption for LOF]{Darstellungsmöglichkeiten abhängig von den Amplituden der Grundvektoren\protect\footnotemark}
+	\end{figure}
+	%\footnotetext{Zhang, Rui. Wang, Zhiteng. Zhang, Hongjun Quantum-Inspired Evolutionary Algorithm for Continuous Space Optimization Based on Multiple Chains Encoding Method of Quantum Bits, https://www.researchgate.net/publication/287429217\_Quantum-Inspired\_Evolutionary\_Algorithm\_for\_Continuous\_Space\_Optimization\_Based\_on\_Multiple\_Chains\_Encoding\_Method\_of\_Quantum\_Bits, 17.04.2017}
+	\footnotetext{Rui Zhang et al., Juli 2014}
+	Falls diese Darstellungsweise genutzt wird, kann man folglich den gesamten Zustand des einzelnen Qubits in eine $2*1$ Matrix zusammenfassen, die den gesamten Zustand des Ein-Qubit Systems darstellt.
+	\begin{align*}
+	\ket{0} &= \begin{pmatrix} 1 \\ 0 \end{pmatrix} & \ket{1} &= \begin{pmatrix} 0 \\ 1\end{pmatrix}
+	& \Rightarrow \ket{\psi_{1}} &= \alpha\ket{0} + \beta\ket{1} = 
+	\begin{bmatrix} \alpha \\ \beta \end{bmatrix}
+	\end{align*}
+	
+\subsubsection{Erweiterung auf mehrerere Qubits}			% 2.2.1.3
+Da eine Superposition eines Qubits durch die Amplituden aller möglichen Teilzustände dieses Qubits beschrieben wird, sind für eine vollständige Superpositionsbeschreibung dieses Qubits die Amplituden von $\ket{0}$ und $\ket{1}$ nötig.
+Verallgemeinert auf $n$ Qubits steigt die Anzahl dieser Teilzustände exponentiell, denn $n$ Qubits besitzen $2^n$ Teilzustände. Somit wird nach der oben genannten Darstellungsweise eine $2^n * 1$ Matrix für das $n$-Qubit System benötigt. Die erste Zeile der Matrix gibt dabei die Amplitude für den Endzustand $\ket{000\cdots0}$ und die letzte Zeile die Amplitude für den Endzustand $\ket{111\cdots1}$ an. Allgemein kann man den Zustand in der $m$-ten Zeile durch die binäre Darstellung der Zeilenzahl ($m_2$) ermitteln.
+	\begin{align*}
+	\ket{\psi_1} &= \begin{pmatrix} \alpha_1 \\ \beta_1 \end{pmatrix} &
+	\ket{\psi_2} &= \begin{pmatrix} \alpha_1 * \alpha_2  \\ \alpha_1 * \beta_2 \\ \beta_1 * \alpha_2 \\ \beta_1 * \beta_2 \end{pmatrix} &
+	\ket{\psi_3} &= \begin{pmatrix} \alpha_1 * \alpha_2 * \alpha_3  \\ \alpha_1 * \alpha_2 *\beta_3 \\ \alpha_1 * \beta_2 * \alpha_3 \\ \alpha_1 * \beta_2 * \beta_3 \\ \vdots \end{pmatrix} &	
+	\cdots
+	\end{align*}
+Folglich nimmt auch die Zahl der darzustellenden Dimensionen für das gesamte $n$-Qubit System zu, denn es werden durch die $2^n$ komplexen Dimensionen theoretisch $2*2^n = 2^{(n+1)}$ Koordinatenachsen benötigt. Eine unrealistische Anzahl für alle $n>1$, denn ab $n=2$ bedarf es mindestens 8 Koordinatenachsen.
+
+\subsubsection{Kroneckermultiplikation}						% 2.2.1.4
+Um eine Veränderung an einer Quantensuperposition vorzunehmen, benötigt man bei dieser Darstellungsweise eine Matrix, die dieselbe Breite aufweist wie die Höhe der Quantensuperposition. Sowohl für die Berechnung des anfänglichen Quantensuperpositionszustandes aus den einzelnen Qubits als auch für die Berechnung eines Gesamtgatters aus den einzelnen später beschriebenen Gattern nutzt man das Kroneckerprodukt\footnote{Paola Cappellaro, 2012, S.39}.
+Es ist ein besonderes Produkt zweier beliebiger Matrizen $A$ und $B$ und und enthält alle Permutationen von Produkten der Einträge der multiplizierten Matrizen. Das Kroneckerprodukt ist jedoch nicht kommutativ, weswegen die Gatter in derselben Weise wie die einzelnen Qubits kronecker-multiplizert werden müssen, um ein valides Ergebnis erhalten zu können.
+	\begin{align*}
+	\textbf{A}\otimes \textbf{B} &=
+	\begin{bmatrix} A_{a1}\cdot B & A_{a2}\cdot B & \cdots \\ A_{b1}\cdot B & A_{b2}\cdot B & \cdots \\ \vdots & \vdots & \ddots \end{bmatrix} = \text{\hspace{0cm}}
+	\begin{bmatrix}
+	\begin{matrix} A_{a1}\cdot B_{a1} & A_{a1}\cdot B_{a2} & \cdots \\ A_{a1}\cdot B_{b1} & A_{a1}\cdot B_{b2} & \cdots \\ \vdots & \vdots & \ddots \end{matrix} \quad \begin{matrix} A_{a2}\cdot B_{a1} & A_{a2}\cdot B_{a2} & \cdots \\ A_{a2}\cdot B_{b1} & A_{a2}\cdot B_{b2} & \cdots \\ \vdots & \vdots & \ddots \end{matrix} & \begin{matrix} \cdots \\ \cdots \\ \cdots \end{matrix} \\
+	\begin{matrix} A_{b1}\cdot B_{a1} & A_{b1}\cdot B_{a2} & \cdots \\ A_{b1}\cdot B_{b1} & A_{b1}\cdot B_{b2} & \cdots \\ \vdots & \vdots & \ddots \end{matrix} \quad \begin{matrix} A_{b2}\cdot B_{a1} & A_{b2}\cdot B_{a2} & \cdots \\ A_{b2}\cdot B_{b1} & A_{b2}\cdot B_{b2} & \cdots \\ \vdots & \vdots & \ddots \end{matrix} & \begin{matrix} \cdots \\ \cdots \\ \cdots \end{matrix} \\
+	\begin{matrix} \text{\hspace{0.55cm}} \vdots \text{\hspace{1.45cm}} & \vdots  \text{\hspace{0.95cm}} & \vdots \text{\hspace{0.85cm}} \end{matrix} \text{\hspace{0.45cm}} \begin{matrix} \vdots \text{\hspace{1.4cm}} & \vdots \text{\hspace{0.9cm}} & \vdots \end{matrix} & \begin{matrix} \ddots \end{matrix}
+	\end{bmatrix}\\
+	\ket{\psi_n} &= q_1 \otimes (q_2 \otimes(\cdots \otimes (q_{n-1} \otimes q_n))) \\
+	Gatter_n &= G_{t(1)} \otimes (G_{t(2)} \otimes(\cdots \otimes (G_{t(n-1)} \otimes G_{t(n)})))
+	\end{align*}
+
+\subsubsection{Matrixmultiplikation}						% 2.2.1.5
+Will man aus den durch Kroneckermultiplikation berechneten Gesamtgattern und der Anfangssuperposition die Ausgabe des Quantencomputers berechnen, dann muss man Matrixmultiplikation anwenden können\footnote{Institute of Physics, Slovak Academy of Sciences, Januar 2016, S.1}. Für eine Matrixmultiplikation werden zwei Ausgangsmatrizen mit der Eigenschaft benötigt, dass die Zeilenanzahl der zweiten Matrix gleich der Spaltenanzahl der ersten Matrix ist. Als Ergebnis der Matrixmultiplikation erhält man eine Matrix mit der Zeilenanzahl der ersten und der Spaltenanzahl der zweiten Ausgangsmatrix.
+\begin{align*}
+	\textbf{A}_{l*m}\textbf{B}_{m*n} &= \textbf{Result}_{l*n}
+\end{align*}
+Ist das Ziel die Berechnung des Endsuperpositionszustandes des Qubitsystems als Folge von zeitlich nacheinander ablaufenden Einwirkungen der einzelnen Gesamtgatter auf den Qubitsystem-Anfangszustand, so muss der Anfangszustand in zeitlich geordneter Reihenfolge mit allen Gesamtgattern multipliziert werden, um den Endsuperpositionszustand zu erhalten.
+\begin{align*}
+	\ket{\psi_{n:res}} &= \cdots(Gatter_3 \cdot (Gatter_2 \cdot (Gatter_1 \cdot \ket{\psi_{n:0}})))
+\end{align*}
+Die gestellten Bedingungen werden dabei eingehalten, da die Qubitsuperpositionszustände $2^n*1$ und die Gatter $2^n*2^n$ als Größe aufweisen.\\
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+		\centering
+		Allgemein
+  		\begin{align*}
+  			\textbf{AB}_{l*n} &= \textbf{A}_{l*m}\textbf{B}_{m*n} \\  			
+  			&= \left[ \begin{smallmatrix}
+  			a_{11} & a_{12} & \cdots & a_{1m}\\ a_{21} & a_{22} & \cdots & \cdots \\ \cdots & \cdots & \cdots & \cdots\\ a_{l1} & \cdots & \cdots & a_{lm} \end{smallmatrix} \right] \left[ \begin{smallmatrix} 
+  			 b_{11} & b_{12} & \cdots & b_{1n}\\ b_{21} & b_{22} & \cdots & \cdots\\ \cdots & \cdots & \cdots & \cdots \\ b_{m1} & \cdots & \cdots & b_{mn} \end{smallmatrix} \right]\\
+  			 &= \begin{bmatrix}
+  			 \displaystyle\sum_{k=1}^{m} a_{1k}b_{k1} & \displaystyle\sum_{k=1}^{m} a_{1k}b_{k2} & \cdots & \displaystyle\sum_{k=1}^{m} a_{1k}b_{kn} \\
+  			 \displaystyle\sum_{k=1}^{m} a_{2k}b_{k1} & \displaystyle\sum_{k=1}^{m} a_{2k}b_{k2} & \ddots & \vdots \\
+  			 \vdots & \ddots & \ddots & \vdots \\
+  			 \displaystyle\sum_{k=1}^{m} a_{lk}b_{k1} & \cdots & \cdots & \displaystyle\sum_{k=1}^{m} a_{lk}b_{kn} 
+  			 \end{bmatrix} \hspace{1cm}
+  		\end{align*}
+  		\caption{Mathematische Umsetzung}
+		\end{subfigure}
+		\begin{subfigure}{.3\textwidth}
+  		\centering
+  		Beispiel
+  		\vspace{0.2cm}
+ 	 	\includegraphics[width=1\linewidth]{matrixmultiplikation_diagramm.png}
+ 	 	\centering
+ 	 	Rot : $a_{1,1} \cdot b_{1,2} + a_{1,2} \cdot b_{2,2}$\\
+ 	 	Blau: $a_{3,1} \cdot b_{1,3} + a_{3,2} \cdot b_{2,3}$
+ 	 	\vspace{1.5cm}
+ 	 	\caption{Vorgehensverdeutlichung\protect\footnotemark}
+		\end{subfigure}
+	\end{figure}\\
+	\footnotetext{User:Bilou, Oktober 2010}
+In der mathematischen Darstellung erschließt sich daraus ein Problem. Es werden große Matrizen erstellt, welche dann aufwendig mit einem Qubitzustand multipliziert werden müssen. Durch das exponentielle Komplexitätswachstum ist die Berechnung des Endsuperpositionszustandes des Qubitsystems daher schon bei moderaten Systemgrößen selbst mit Computerrechenassistenz nahezu unmöglich. Deswegen werden Quantencomputer entwickelt, die sich die Eigenschaften von Teilchen zu Nutze machen, die diese Veränderungen physisch ausführen können.\footnote{Kapitel 3.2.1: Funktionsweise von Quantencomputern}
+
+\subsubsection{Verschränkte Qubits}							% 2.2.1.6
+Eine der komplexesten und hervorstechendsten Eigenschaften von $n$-Qubit Systemen ist die Verschränkbarkeit der Qubits des Systems\footnote{Roland Wengenmayr, Juli 2012, S.2}.
+Darunter versteht man die Möglichkeit, einen Endsuperpositionszustand zu erzeugen, welcher nicht allein durch theoretische Amplituden der korrespondierenden Grundzustände der Qubits beschrieben werden kann. Dieser Zustand hat deshalb die Eigenschaft, 
+aus keinem Kroneckerprodukt $n$ spezifischer $\ket{\psi_1}$ Matrizen berechnet werden zu können.
+\begin{align*}
+\ket{\psi_n} \neq q_1 \otimes (q_2 \otimes(\cdots \otimes (q_{n-1} \otimes q_n))) \\
+\end{align*}
+Somit erklärt die Verschränkung das exponentielle Datenwachstum der Superpositionszustände eines $n$-Qubit Systems. Denn wenn nicht alle Zustände eines Systems durch die einzelnen Teilsysteme beschrieben werden können, dann müssen Daten über alle möglichen Permutationszustände der einzelnen Qubitamplituden des Systems gespeichert werden können. Dies entspricht exakt der Wirkung des Kroneckerproduktes von $n$ Qubits.\\
+\begin{align*}
+\underbrace{
+\begin{alignedat}{2}
+2 \Bigg\{ \begin{pmatrix} \alpha_1 \\ \beta_1 \end{pmatrix} &\quad \begin{pmatrix} \alpha_2 \\ \beta_2 \end{pmatrix} &\quad  \cdots &\quad \begin{pmatrix} \alpha_n \\ \beta_n \end{pmatrix}\\
+\downarrow\quad &\qquad \downarrow &\quad \cdots &\qquad \downarrow \\ 
+\underline{\hspace{5mm}} \hspace{3mm} &\qquad \underline{\hspace{5mm}} & \quad \cdots & \qquad \underline{\hspace{5mm}}
+\end{alignedat}
+}_{\text{\begin{large}n\end{large}}} &=
+\begin{pmatrix} \alpha_1 \\ \beta_1 \end{pmatrix} \otimes \left(\begin{pmatrix} \alpha_2 \\ \beta_2 \end{pmatrix} \otimes\left(\cdots \otimes \begin{pmatrix} \alpha_n \\ \beta_n \end{pmatrix}\right)\right)
+ = 2^n
+\end{align*}\\
+\end{document}

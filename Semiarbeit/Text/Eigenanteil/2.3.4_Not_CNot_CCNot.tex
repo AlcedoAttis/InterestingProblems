@@ -1,0 +1,74 @@
+\documentclass[12pt]{report} 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage{braket}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\def\arraystretch{1.5}    %nicht
+\setlength{\parskip}{0pt} %kaputtmachen	
+\begin{document}
+\subsection{Negationsgatter}	% 2.3.1
+\subsubsection{Not Gatter}			% 2.3.1.1
+Es gibt zwei Möglichkeiten, um die Idee eines Not-Gatters zu interpretieren.
+Die einfachere Interpretation ist die eines Tausch-Gatters, welches seine negierende Wirkung in den Amplituden der Grundzustände des Qubits sieht. Dieser Tausch wird durch eine sogenannte "Exchange Matrix", eine antidiagonale quadratische Matrix der Größe 2 mit Einsen als einzige Einträge ungleich 0 umgesetzt. Diese Matrix ist auch als X-Pauli-Gatter bekannt\footnote{Kapitel 2.3.2: Pauligatter}.
+\begin{align*}
+	\ket{\psi_1} &= \alpha\ket{0} + \beta\ket{1} &
+	Tausch\left(\ket{\psi_1}\right) &= \beta\ket{0} + \alpha\ket{1}\\
+	X &= Tausch = \begin{bmatrix} 0&1\\1&0 \end{bmatrix} 
+\end{align*}
+Etwas komplexer ist die Interpretation des Not-Gatters als Anti-Gatter mit der Zielsetzung einer Zustandsamplitudenveränderung der Qubitgrundzustände zu einem senkrechten Qubitvektor in der zweidimensional komplexen Qubitdarstellungsweise. Dies hat aufgrund der senkrechten Grundvektoren $\ket{0}$ und $\ket{1}$ eine negierende Wirkung auf die Amplituden des Qubits.
+\begin{align*}
+	\ket{\psi_1} &= \alpha\ket{0} + \beta\ket{1} &
+	Anti\left(\ket{\psi_1}\right) = \ket{\psi_1^{\perp}} &= \alpha^*\ket{0} - \beta^*\ket{1}\\
+\end{align*}
+Es ist allerdings aufgrund komplexer Gründe außerhalb des Verständnisbereiches der Autoren selbst theoretisch unmöglich, ein Anti-Gatter zu verwirklichen, da bewiesenermaßen kein Gatter existieren kann, welches diese Aufgabe perfekt erfüllt.\footnote{Alexander S. Shumovsky, Valery I. Rupasov, 06.12.2012, S.67}
+
+\subsubsection{C-Not Gatter}			% 2.3.1.2
+Ein C-Not Gatter oder Control-Not Gatter hat mit einer Einschränkung dieselbe Wirkung wie das X-Pauli Gatter. Es wirkt nur auf das Zielqubit, falls sich ein spezifiziertes Kontrollqubit im Zustand $\ket{1}$ befindet.
+\begin{align*}
+	q_{control}=\ket{0} &\Rightarrow CNot_{target}=\begin{bmatrix} 1&0\\0&1 \end{bmatrix}=\text{\textbf{I}} & q_{control}=\ket{1} &\Rightarrow CNot_{target}=\begin{bmatrix} 0&1\\1&0 \end{bmatrix}=\text{\textbf{X}}
+\end{align*}
+Wendet man ein C-Not Gatter auf ein $n$-Qubit System an, so hat man $n^2$ Möglichkeiten für die Position des C-Not Gatters abhängig vom Kontrollqubit und vom Zielqubit. Damit streckt sich das C-Not Gatter theoretisch über 2 Qubits, praktisch muss die Größe durch die Gesamtgatterberechnung mittels Kroeneckermultiplikation\footnote{Kapitel 2.2.1 Mathematische Grundlagen} jedoch mindestens die Anzahl der Qubits sein, über die sich das C-Not Gatter erstreckt. Außerdem hat jede dieser Möglichkeiten eine andere Wirkung auf das System und muss deshalb zwangsläufig eine eigene Matrixdarstellung besitzen.
+\begin{figure}[h]
+\begin{align*}
+CN_{(Gesamtqubitanzahl, Kontrollqubit, Zielqubit)}
+\end{align*}
+\vspace{-1cm}
+\begin{align*}
+CN_{(2,1,0)} &= \left[\begin{smallmatrix} 1&0&0&0 \\0&0&0&1 \\0&0&1&0 \\0&1&0&0 \end{smallmatrix}\right] &
+CN_{(2,0,1)} &= \left[\begin{smallmatrix} 1&0&0&0 \\0&1&0&0 \\0&0&0&1 \\0&0&1&0 \end{smallmatrix}\right] &
+CN_{(3,2,0)} &= \left[\begin{smallmatrix} 
+1&0&0&0&0&0&0&0\\
+0&0&0&0&0&1&0&0\\
+0&0&1&0&0&0&0&0\\
+0&0&0&0&0&0&0&1\\
+0&0&0&0&1&0&0&0\\
+0&1&0&0&0&0&0&0\\
+0&0&0&0&0&0&1&0\\
+0&0&0&1&0&0&0&0\\
+\end{smallmatrix}\right] &
+\end{align*}
+\caption{Beispiele einiger ausgewählter C-Not Gattermatrizen}
+\end{figure}\\
+Die Herleitung der C-Not Gattermatrix ist aufwendig. Die intuitivste Herangehensweise für die Herleitung der Gattermatrix eines C-Not Gatters über $m$ Qubits ist der Beginn mit einer quadratischen Nullmatrix der Größe $2^m$. Dann weist man jeder Zeile und jeder Spalte den korrespondierenden Teilzustand zu, geht nacheinander alle Zeilen und damit Ausgangsteilzustände durch und setzt eine Eins in der Spalte, die den Zustand darstellt, zu dem der Ausgangsteilzustand verändert wurde.
+\begin{figure}[h]
+\begin{alignat*}{4}
+CNot_{(m,v1,v2)} &= \begin{matrix}\\\begin{bmatrix} 0&0&0&\cdots \\ 0&0&0&\cdots \\ 0&0&0&\cdots \\ \vdots&\vdots&\vdots&\ddots \end{bmatrix}\end{matrix}
+&\Rightarrow \begin{matrix}
+	& \ket{\cdots 00} \ket{\cdots 01} \ket{\cdots 10} \cdots \\
+	\begin{matrix} \ket{\cdots 00} \\ \ket{\cdots 01} \\ \ket{\cdots 10} \\ \vdots \end{matrix} \hspace{-3mm}
+	& \begin{bmatrix} \hspace{3mm}0\hspace{3mm}&\hspace{3mm}0\hspace{3mm}&\hspace{3mm}0\hspace{3mm}&\cdots \\ 0&0&0&\cdots \\ 0&0&0&\cdots \\ \vdots&\vdots&\vdots&\ddots \end{bmatrix}\end{matrix}
+	&\Rightarrow \begin{matrix}\\\begin{bmatrix} 1&0&0&\cdots \\ 0&0&1&\cdots \\ 0&1&0&\cdots \\ \vdots&\vdots&\vdots&\ddots \end{bmatrix}\end{matrix}
+\end{alignat*}
+\end{figure}
+
+\subsubsection{CC-Not Gatter}			% 2.3.1.3
+Ein CC-Not Gatter oder Toffoli Gatter\footnote{Benannt nach Tomaso Toffoli, \glqq ECE\grqq{} Forschungsprofessor der \glqq Boston University\grqq} ist eine Variante eines kontrollierten Not-Gatters mit zwei Kontrollqubits, im Unterschied zum C-Not Gatter. Es müssen sich beide Kontrollqubits im Zustand $\ket{1}$ befinden, damit ein X-Gatter auf das Zielqubit wirkt. Die Größe hängt wieder von der Anzahl der Qubits ab, die das CC-Not Gatter überspannt. Das mittlere CCNot Qubit ist dabei irrelevant für die Arraygröße, aber nicht für die Gattermatrix, welche nach dem gleichen Schema wie das C-Not Gatter erstellt werden kann.
+
+\subsubsection{C$_{n}$-Not Gatter}
+Theoretisch kann die Vorgehensweise auf beliebig viele Kontrollqubits ausgedehnt werden, praktisch werden größere C$_n$-Not Gatter jedoch wegen der wachsenden Komplexität und Verlangsamung\footnote{D.Gross, S.T.Flammia, J.Eisert, Mai 2009, Abstract} von Qubitsystemen nicht für Qubitalgorithmen verwendet.
+\end{document}

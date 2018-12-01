@@ -1,0 +1,133 @@
+\documentclass[a4paper]{scrartcl} 
+\usepackage[ngerman]{babel} 
+\usepackage{pgfplots}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{relsize}
+\usepackage[top=.25in, bottom=0.5in, left=.5in, right=0.5in]{geometry} %nice
+
+%\usepackage{showframe}
+
+\pgfplotsset{compat=1.15}
+\usetikzlibrary{datavisualization}
+
+\lstset{literate=
+  {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {ß}{{\ss}}1
+}
+
+\newcommand*\dif{\mathop{}\!\mathrm{d}} 
+
+% function ill use 
+% 2^y * x^(-(2^y+1))
+% pow(2,y) * pow(x,(-(pow(2,y)+1)))
+%
+%
+%
+
+\definecolor{at0}{rgb}{.8,0,0}
+\definecolor{at1}{rgb}{.4,0,0}
+\definecolor{at2}{rgb}{.2,0,0}
+\definecolor{at3}{rgb}{.1,0,0}
+\definecolor{f1}{rgb}{.8,1,0}
+\definecolor{f2}{rgb}{.8,1,.8}
+\pgfkeys{/pgfplots/legend entry/.code=\addlegendentry{#1}}
+
+\begin{document}
+\title{\huge\normalfont\bfseries\text{Konvergente Statistische Folgen	}}
+\author{}
+\date{}
+\maketitle
+
+%\begin{figure}[h]
+\begin{center}
+\vspace*{-2.3cm}
+{\Large Philip Geißler}\\
+\begin{tikzpicture}
+\begin{axis}[
+axis x line=center,
+  axis y line=center,
+  xtick={1.001,1.75,2,3,4},
+  xticklabels={1,$\varepsilon$,2,3,4},
+  ytick={0.001,0.5,1,1.5},
+  yticklabels={0,$\frac{1}{2}$,1,$\frac{3}{2}$},
+  xlabel={$x$},
+  ylabel={$p(x)$},
+  xlabel style={below right},
+  ylabel style={above left},
+  xmin=1,
+  xmax=5,
+  ymin=0,
+  ymax=1.45,
+  scale only axis,
+  width = 0.87\linewidth,
+  height = 0.25\linewidth ]
+
+\addplot[domain=1.74:1.76 ,samples=5, smooth, white!80!black, line width = .5pt, forget plot, dashed]
+{1000*x-1750};
+\addplot[domain=1:1.75 ,samples=50, smooth, fill=f1!30!white,forget plot] {pow(2,0) * pow(x,(-(pow(2,0)+1)))} \closedcycle;
+\addplot[domain=1.75:4.97 ,samples=50, smooth, fill=f2!50!white,forget plot] {pow(2,0) * pow(x,(-(pow(2,0)+1)))} \closedcycle;
+\addplot[domain=1:4.97 ,samples=500, smooth, white!80!at3, legend entry=$p_{5}(x)$, line width = .5pt]
+{pow(2,5) * pow(x,(-(pow(2,5)+1)))};
+\addplot[domain=1:4.97 ,samples=50, smooth, white!40!at2, legend entry=$p_{2}(x)$, line width = .66pt]
+{pow(2,2) * pow(x,(-(pow(2,2)+1)))};
+\addplot[domain=1:4.97 ,samples=50, smooth, white!20!at1, legend entry=$p_{1}(x)$, line width = 1pt]
+{pow(2,1) * pow(x,(-(pow(2,1)+1)))};
+\addplot[domain=1:4.97 ,samples=50, smooth, white!10!at0, legend entry=$p_{0}(x)$, line width = 1.5pt]
+{pow(2,0) * pow(x,(-(pow(2,0)+1)))};
+
+\addplot[domain=-2:-1 ,samples=5, smooth, f1!30!white, line width = 10	pt, legend entry=$P^{[\varepsilon]}_{\neg{A}}(0)$]
+{x};
+\addplot[domain=-2:-1 ,samples=5, smooth, f2!50!white, line width = 10	pt, legend entry=$P^{[\varepsilon]}_{{A}}(0)$]
+{x};
+\end{axis}
+\end{tikzpicture}
+%\end{figure}
+\end{center}
+\centering
+\begin{minipage}[b]{0.84\linewidth}
+Man definiere sich eine Wahrscheinlichkeitsverteilungsfunktion $p_{n}(x)$, die über einen Parameter $n$ verändert werden kann und auf ihrem Definitionsbereich eine Einheitsfläche einschließe:
+\end{minipage}
+\begin{align*}
+p_{n}(x) &= \frac{2^n}{x^{2^n+1}} & \int_{1}^{\infty} p_{n}(x) \dif x&= \left[ -\frac{1}{x^{2^n}} \right]_1^{\infty} = 1 & \text{DB} \left(p_{n}(x)\right) &= \left[ 1,\infty\right[\\
+\end{align*}
+\begin{minipage}[t]{0.84\linewidth}
+\vspace*{-0.8cm}
+Darauffolgend definiere man durch Zweiteilung des Definitionsbereich von $p_{n}(x)$ zwei Ereigniswahrscheinlichkeiten $P^{[q]}_A(n)$ und $P^{[q]}_{\neg{A}}(n)$ dafür, dass $x$ in, oder eben nicht in $[q,\infty[$ liegt. Außerdem bilde man eine allgemeine Bereichswahrscheinlichkeit $P^{[p,q]}(n)$:
+\end{minipage}
+\begin{align*}
+P^{[q]}_A(n) &= \int_{q}^{\infty} p_{n}(x) \dif x = q^{-(2^n)} & P^{[p,q]}(n) &= \int_{p}^{q} p_{n}(x) \dif x\\
+\Rightarrow P^{[q]}_{\neg{A}}(n) &= \int_{1}^{q} p_{n}(x) \dif x = 1-q^{-(2^n)}\\
+\end{align*}	
+\begin{minipage}[t]{0.84\linewidth}
+\vspace*{-0.8cm}
+Zusätzlich bilde man $Q_{\neg{A}}^{[q]}(k)$, welches die Wahrscheinlichkeit für dauerhaftes Auftreten von $\neg A$ und damit für das Nichtauftreten von $A$ in $p_k(x),\hspace{1pt} p_{k+1}(x),\hspace{1pt} p_{k+2}(x),\hspace{1pt} \ldots$ angibt:
+\end{minipage}
+\begin{align*}
+\Rightarrow \textstyle{Q}_{\neg{A}}^{[q]}(k) &= p({\neg A}_{k}\wedge{\neg A}_{k+1}\wedge\ldots) = \prod_{i=k}^{\infty} P^{[q]}_{\neg{A}}(i) = \prod_{i=k}^\infty 1-q^{-(2^i)} >0 &:{q>1	}\\
+ \lim_{k \rightarrow \infty} {Q}_{\neg{A}}^{[q]}(k)&=1
+\end{align*}
+\begin{minipage}[t]{0.84\linewidth}
+%\vspace*{-0.8cm}
+Nun kann eine statistische Folge $(x_n)_{n=0}^{\infty}$ auf Basis des Wahrscheinlichkeitsmaßes erstellt werden, deren Glieder eine (unterschiedliche) Wahrscheinlichkeitsverteilung für ihre Werte besitzen:
+\end{minipage}
+\vspace*{-0.3cm}
+\begin{align*}
+\text{Folge: }& (x_n)_{n=0}^{\infty} \hspace*{2cm} x_n \in \text{ DB}(P_{n}(x)) : p(x_n\in [b,d]) = P^{[b,d]}(n)\\
+\text{klassische Konvergenz: }& \forall\varepsilon > 0, ~\exists n_0 \in \mathbb{N}, ~\forall n \geqslant n_0 : | x_n - a| < \varepsilon
+\end{align*}
+\begin{minipage}[t]{0.84\linewidth}
+Um schließlich das Konvergenzkiterium sinnvoll auf statistische Folgen zu erweitern, muss man noch eine beliebig kleine Wahrscheinlichkeit $\omega_n = 1- \textstyle{Q}_{\neg{A}}^{[\varepsilon]}(n)$, $(n\geqslant n_0)$ für das zukünftige Auftreten eines Gliedwertes außerhalb der $\varepsilon$-Umgebung verlangen können:
+\end{minipage}
+\begin{align*}
+\text{statistische Konvergenz:  }
+\forall\varepsilon,\omega > 0, ~\exists n_0 \in \mathbb{N}, ~\forall n \geqslant n_0 : p\left(| x_n - 1| > \varepsilon\right) = 1- \textstyle{Q}_{\neg{A}}^{[\varepsilon]}(n) < \omega
+\end{align*}
+\begin{minipage}[t]{0.84\linewidth}
+Unsere Folge $(x_n)_{n=0}^{\infty}$ erfüllt dies und ist damit trotz der Möglichkeit beliebig großer Werte von beliebig späten Gliedern statistisch konvergent. \hfill{} \textit{q.e.d.}	
+\end{minipage}
+\end{document}
+

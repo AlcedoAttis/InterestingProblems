@@ -1,0 +1,90 @@
+\documentclass[12pt]{report} 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\def\arraystretch{1.5}    %nicht
+\setlength{\parskip}{0pt} %kaputtmachen	
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+  
+\title{\begin{Huge}\textbf{Quantencomputer etc Titel...}\end{Huge}\\		% Titel
+Nutzen für Menschen etc Untertitel}											% Untertitel
+\author{Philip Geißler, Alexander von Mach, Joe Schaller\\					% Authoren
+Stephan Fritzsche?, Vorname Hertenberger?, Ilona Böttcher?}					% Coauthoren, Hilfe ?? (optional) 
+\maketitle
+% Dieser Teil ist nur für Joe. Das ist die Überschrift!
+
+
+%LAYOUTIDEE
+% bitte nicht in direkt in ein Capter schreiben!
+% Statdessen Sections darunter öffnen und in diese schreiben
+\chapter{Einführung Quantencomputer}
+\section{•}
+bla
+\section{•}
+blah
+\chapter{Qubits}							% X
+\section{Was sind Qubits}					% X.Y
+blubb
+\subsection{Theoretische Qubitarten}		% X.Y.Z
+blibb
+
+
+
+\section{Erster Teil}
+Bsp: Mathematik\\
+Notiz 1: Das Sternchen bei "align" sorgt dafür das die einzelnen Formeln nicht nummmeriert werden.\\
+Notiz 2: Das Dollarzeichen nicht im grünen Teil benutzen!
+Notiz 3: proof macht so ein Quadrat ans Ende.
+Notiz 4: Wenn ihr was nacheinander macht immer ein \& (ohne Backslash) dazwischen, sonst geht was kaputt.
+\begin{proof}[Name des Beweises]\begin{align*}
+\sum_{i=1}^{k+1}i & = \left(\sum_{i=1}^{k}i\right) +(k+1)\\ 
+& = \frac{(k+1)((k+1)+1)}{2}\\
+\mathbb{N} & \text{ ist das Zeichen für natürliche Zahlen.}
+\end{align*}\end{proof}
+
+\begin{align*}
+Matrixa &=
+\begin{pmatrix}
+	A&B&C&D\\
+	a&b&c&d\\
+	a&B6c&D\\
+	A&b&C&d
+\end{pmatrix}
+\end{align*}
+
+\section{Zweiter Teil}
+Bsp: Text\\
+Überraschung. Text ist Text\\
+\begin{Huge} Text kann riesig \end{Huge}\\
+\begin{tiny} bis mini sein \end{tiny}\\
+Nachvollziebar nutzen!
+
+\newpage	% Formatiert das folgende auf die nächste Seite.
+\section{Dritter Teil}
+Bsp: Tabellen\\
+Notiz 1: Für größere Tabellen größere Schrift verwenden.
+Notiz 2: Das cl in den Klammern sorgt für das Layout: 
+l=left, c=center, r=right\\\\
+
+\begin{tabular}[]{clr}
+	A 			& B 		& ... \\
+	\hline
+	erstens    	& qwerzt	& Nichts\\
+	zweitens   	& asdfgh	&       \\
+	drittens   	& yxcvbn
+\end{tabular}
+
+\section{Vierter Teil}
+Bsp: Bilder\\
+Notiz 1: Breite A4: 21,95cm, Höhe A4: 35,56cm\\
+%\includegraphics[width=10cm]{bildname.png}
+
+\end{document}
+% Falls Fragen auftreten, dann bitte mich FÜR eine Lösung, oder mich MIT einer Lösung anschreiben,
+% damit wir die gleichen Layouts nutzen und nicht jeder etwas abändert.

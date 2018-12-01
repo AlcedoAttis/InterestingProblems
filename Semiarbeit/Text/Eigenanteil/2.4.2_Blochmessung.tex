@@ -1,0 +1,101 @@
+\documentclass[12pt]{report} 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{braket}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\def\arraystretch{1.5}    %nicht
+\setlength{\parskip}{0pt} %kaputtmachen	
+\begin{document}
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+\section{Messungen von Qubits}
+\subsection{Standardmessung auf $\ket{0}$ / $\ket{1}$ Basis}	% 2.4.1#
+%Philips Tipp
+% man erhält die Amplitudenatrix des Endsuperpositionszustandes
+% man kann die 1: direkt Darstellen aber ist nicht hilfreich weil keine praxisinformation + Bspdiagramm
+% deshalb 2: Absolutes Quadrat (siehe compl.Zahlen) Darstellen, weil das die Wahrscheinlichkeiten sind + Bspdiagramm des selben Zustandes
+
+% gutes Zustandsbeispiel: 2Qubits |00> = sqrt(0.5), |01> = sqrt(0,25), |10> und |11> = sqrt(0.125)
+% weil das is ne Treppe und stellt damit die Verzerrung durch ne wurzel schön dar
+% wenn Fragen: WhatsApp
+\subsection{Blochkugelmessung}	
+% DIESER SATZ IST ABHÄNGIG VON DEINEM ABSCHLUSS! BESTENFALLS ANPASSEN								% 2.4.2
+Speziell für Visualisierungen von einzelnen Qubits wird eine besondere Darstellungsweise benutzt: die Blochkugel\footnote{David Terr, o.J, S.1}.
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{.34\textwidth}
+		\centering
+		\includegraphics[height=4.6cm]{blochkugel4.png}
+		\end{subfigure}
+		\begin{subfigure}{.27\textwidth}
+  		\begin{align*}
+  			\overrightarrow{Z_{max}} &= \left( \begin{smallmatrix} 0\\0\\1 \end{smallmatrix} \right) = \ket{0} \\
+  			\overrightarrow{Y_{max}} &= \left( \begin{smallmatrix} 0\\1\\0 \end{smallmatrix} \right) = \frac{\ket{0}+i\ket{1}}{\sqrt{2}} \\
+  			\overrightarrow{X_{max}} &= \left( \begin{smallmatrix} 1\\0\\0 \end{smallmatrix} \right) = \frac{\ket{0}+\ket{1}}{\sqrt{2}} \\
+  			\overrightarrow{XY_{\phi}} &= \left( \begin{smallmatrix} sin(\phi)\\cos(\phi)\\0 \end{smallmatrix} \right) = \frac{\ket{0}+e^{i\phi}\ket{1}}{\sqrt{2}}
+  		\end{align*}
+		\end{subfigure}
+		\begin{subfigure}{.27\textwidth}
+  		\begin{align*}
+  			\overrightarrow{Z_{min}} &= \left( \begin{smallmatrix} 0\\0\\-1 \end{smallmatrix} \right) = \ket{1} \\
+  			\overrightarrow{Y_{min}} &= \left( \begin{smallmatrix} 0\\-1\\0 \end{smallmatrix} \right) = \frac{\ket{0}-i\ket{1}}{\sqrt{2}} \\
+  			\overrightarrow{X_{min}} &= \left( \begin{smallmatrix} -1\\0\\0 \end{smallmatrix} \right) = \frac{\ket{0}-\ket{1}}{\sqrt{2}} 		
+  		\end{align*}
+  		\vspace{0.62cm}
+		\end{subfigure}
+		\caption{Blochkugelschema und bestimmte Blochvektoren}
+	\end{figure}\\
+	Die Blochkugel ist eine Einheitskugel, welche dazu benutzt wird, alle Zustände eines Qubits der Form $\alpha\ket{0} + \beta\ket{1}$ als Blochvektor der Länge 1 mithilfe von Kugelkoordinaten $(1,\theta,\phi)$ auf ihr darzustellen.
+	Verschränkte Qubits können auch einzeln dargestellt werden, befinden sich dabei jedoch in der Einheitskugel.
+	\begin{align*}
+		\ket{\psi_{1}}_{Standard} &= \alpha\ket{0} + \beta\ket{1} & \text{(normale Schreibweise)}\\
+		\ket{\psi_{1}}_{Bloch} &= cos\left(\frac{\theta}{2}\right)\ket{0} + e^{i\phi}\cdot sin\left(\frac{\theta}{2}\right)\ket{1} & \text{(Blochvektordefiniton)} \\
+		&= cos\left(\frac{\theta}{2}\right)\ket{0} +\left( cos(\phi)+i\cdot sin(\phi) \right)\cdot sin\left(\frac{\theta}{2}\right)\ket{1} & 0 < \theta < \pi\text{ , }0 < \phi < 2 \pi\\
+		&\Rightarrow \alpha \in \mathbb{R} \wedge \beta \in \mathbb{C}
+	\end{align*}
+Um $\ket{\psi_{1}}$ in Blochvektorform darstellen zu können, muss $\alpha$ jedoch reell sein. Es kann allerdings jede Zustandsmatrix eines einzelnen Qubits so verändert werden, dass eine weiterhin normierte Zustandsmatrix entsteht, welche denselben Qubitzustand wie die Ausgangsmatrix beschreibt, gleich normiert ist, aber ein reelles $\alpha$ beinhaltet.
+\\
+	\begin{align*}
+		 \begin{pmatrix}\alpha\\ \beta\end{pmatrix} &\equiv
+		c\begin{pmatrix}\alpha\\ \beta\end{pmatrix} = \begin{pmatrix}c\alpha\\ c\beta\end{pmatrix} & c := \frac{\bar{\alpha}}{\vert \alpha \vert}\\
+		\Rightarrow\begin{pmatrix}\alpha\\ \beta\end{pmatrix} &\equiv
+		\begin{pmatrix}\frac{\alpha\cdot\bar\alpha}{\vert\alpha\vert}\\ \frac{\beta\cdot\bar\alpha}{\vert\alpha\vert}\end{pmatrix} &
+		\hspace{-1.5cm}\frac{\alpha\cdot\bar\alpha}{\vert\alpha\vert} = \frac{\Re(\alpha)^2+\Im(\alpha)^2}{\sqrt{\Re(\alpha)^2+\Im(\alpha)^2}} = \sqrt{\Re(\alpha)^2+\Im(\alpha)^2} \in \mathbb{R}\\
+		 \vert\alpha\vert &= \sqrt{\Re(\alpha)^2+\Im(\alpha)^2} = \vert c\alpha\vert \\ \Rightarrow \vert \beta \vert &= \vert c \beta \vert
+	\end{align*}
+	Sollen beide Zustandsamplituden des in der Blochkugel dargestellten Qubits aus einem Blochvektor berechnet werden, dann berechnet man die Real- und Imaginärteile von $\alpha$ und $\beta$ einzeln durch trigonometrische Funktionen und setzt diese dann zusammen.
+	\begin{align}
+		 \alpha\ket{0} + \beta\ket{1} &= cos\left(\tfrac{\theta}{2}\right)\ket{0} + e^{i\phi}\cdot sin\left(\tfrac{\theta}{2}\right)\ket{1}
+	\end{align}
+	\begin{align*}
+		 \Rightarrow\Re(\alpha) &= \alpha = cos\left(\frac{\theta}{2}\right) &
+		 \Rightarrow\Im(\alpha) &= 0 \\
+		 \Rightarrow\Re(\beta) &= cos(\phi)\cdot sin\left(\frac{\theta}{2}\right) & 
+		 \Rightarrow\Im(\beta) &= sin(\phi)\cdot sin\left(\frac{\theta}{2}\right)
+	\end{align*}
+	Ist eine Umrechnung in die andere Richtung, von den Zustandsamplituden zum Blochvektor, gefragt, nutzt man die umgestellten Gleichungen, um eine Lösung zu erhalten.
+	\begin{align}
+		 \alpha &= cos\left(\tfrac{\theta}{2}\right) \\
+		 \Re(\beta) &= cos(\phi)\cdot\sin\left(\tfrac{\theta}{2}\right) & \Im(\beta) &= sin(\phi)\cdot sin\left(\tfrac{\theta}{2}\right)
+	\end{align}
+	\vspace{-0.5cm}
+	\begin{align*}
+		 \Rightarrow \frac{\theta}{2} &= cos^{-1}\left( \alpha \right) & \Rightarrow \theta &= 2\cdot cos^{-1}\left( \alpha \right) \\
+		 \Rightarrow cos(\phi) &= \frac{\Re(\beta)}{sin\left( \frac{\theta}{2} \right)} = \frac{\Re(\beta)}{\sqrt{1-\alpha^2}} & \Rightarrow \phi &= cos^{-1}\left( \frac{\Re(\beta)}{\sqrt{1-\alpha^2}} \right)\\
+		 \Rightarrow sin(\phi) &= \frac{\Im(\beta)}{sin\left( \frac{\theta}{2} \right)} = \frac{\Im(\beta)}{\sqrt{1-\alpha^2}} & \Rightarrow \phi &= sin^{-1}\left( \frac{\Im(\beta)}{\sqrt{1-\alpha^2}} \right)\\
+		 & \text{\hspace{0.45cm} falls } \Im(\beta)<0\Rightarrow\phi_{richtig} = 2 \pi - \phi_{berechnet}
+	\end{align*}
+	Wird letztendlich noch der Blochvektor im kartesischen Koordinatensystem mit den gleichen Koordinatenachsen der Blochkugel benötigt, lassen sich die Skalare der einzelnen Grundvektoren für den Ergebnisvektor mithilfe der Umrechnungsgleichungen vom Kugelkoordinatensystem ins kartesische Koordinatensystem berechnen.
+		\[ \overrightarrow{\ket{\psi_1}}_{polar} = \overrightarrow{v(1,\theta,\phi)} \Longrightarrow \overrightarrow{\ket{\psi_1}}_{kartesian} = \overrightarrow{v(x,y,z)} \]
+		\vspace{-1cm}
+	\begin{align*}
+		 x &= sin(\theta)\cdot cos(\phi)\\
+		 y &= sin(\theta)\cdot sin(\phi)\\
+		 z &= cos(\theta)
+	\end{align*}
+\end{document}

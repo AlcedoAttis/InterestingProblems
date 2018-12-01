@@ -1,0 +1,391 @@
+\documentclass[12pt]{report} 
+\usepackage[margin=1in]{geometry}
+\usepackage[ngerman]{babel} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx} %% WICHTIG BEI DIR AUCH REINPACKEN DAMIT ES FUNKT
+\usepackage{listings} %% genauso wichtig
+\usepackage{xcolor}	  %% auch !!!
+\usepackage{braket}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\def\arraystretch{1.5}    %nicht
+\setlength{\parskip}{0pt} %kaputtmachen	\\
+\definecolor{grey}{rgb}{0.3,0.3,0.3}
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Java,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{orange},
+  commentstyle=\itshape\color{grey},
+  identifierstyle=\color{black},
+}
+\lstdefinestyle{customcsmall}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Java,
+  showstringspaces=false,
+  basicstyle=\scriptsize\ttfamily,
+  keywordstyle=\bfseries\color{orange},
+  commentstyle=\itshape\color{grey},
+  identifierstyle=\color{black},
+}
+\lstset{literate=
+  {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {ß}{{\ss}}1
+}
+
+
+\begin{document}
+\chapter{Quantencomputersimulation}
+\section{Grundidee}
+Da jede bisherige Auseinandersetzung mit dem Konzept des Quantencomputers sehr theoretisch verlief, wurde die Simulation als praktischer Überblick über gegenwärtige und Ausblick auf zukünftige Fortschritte der Quantencomputerforschung verwendet. Die Inspiration für die Umsetzung dieses Zieles entstand durch das \glqq Quantum-Experience\grqq{} Projekt des Unternehmens IBM.\footnote{IBM Q Experience, Mai 2016} Als eines der gegenwärtig führenden IT-Unternehmen investiert und forscht es in jede Richtung der Computertechnologie und ist unter anderem durch die Watson KI bekannt. 2016 stellte IBM ein weiteres Forschungsprojekt online: einen Quantencomputer. Jeder Nutzer kann über einen sogenannten Composer Gatter auf einen Gesamtqubitzustand anwenden. Der Composer ist hierbei die Schnittstelle zwischen dem Nutzer und dem Algorithmus und damit ein Teil der GUI. Man besitzt hierbei zwei Möglichkeiten zur Interaktion. Entweder man arbeitet mit einem echten Gesamtqubitzustand, welcher bei ca. 0.015 Kelvin parallel im \glqq Thomas J. Watson Research Center\grqq{} erzeugt wird, oder man entscheidet sich für die Arbeit mit einer rein durch Software definierten Simulation.
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{.49\textwidth}
+		\centering
+  		\includegraphics[width=\linewidth, height=0.23\textheight]{semi_composer.jpg}
+ 	 	\caption{\begin{footnotesize}
+ 	 	Simulationsprogramm dieser Seminarfacharbeit
+ 	 	\end{footnotesize}}
+		\end{subfigure}
+		\begin{subfigure}{.49\textwidth}
+  		\centering
+ 	 	\includegraphics[width=\linewidth, height=0.23\textheight]{ibm_composer.jpg}
+ 	 	\caption{\begin{footnotesize}
+ 	 	IBM Quantum Experience Composer$^1$
+ 	 	\end{footnotesize}}
+		\end{subfigure}
+		\caption{Graphische Benutzeroberflächen beider Quantencomputersimulationen}
+	\end{figure}\\
+Der Computer ist je in der Größe des Projektes, der Kommunikation zwischen Qubits und der Wiedergabe eines vollständig richtigen Ergebnisses aufgrund von Ungenauigkeiten und Grenzen der physikalischen Welt eingeschränkt, während die Simulation mathematisch richtige -- und damit rein theoretische -- Ergebnisse liefert und IBM's Quantencomputer nicht benötigt. Es war ein Ziel unserer Arbeit, eine eigene Simulation zu entwerfen und zu implementieren sowie die GUI in den Hauptpunkten wie Gatterdarstellung und allgemeiner Verwendung möglichst nah an IBM's  \glqq Quantum-Experience\grqq{} anzulehnen.
+Dabei wurde kein Quelltext übernommen, denn der benutzte Code und die verwendeten Bilder des eigenen Programmes sind alle selbst erstellt. Die starken Ähnlichkeiten der Layouts sind auch aufgrund von Notationskonventionen nötig, da besondere Gatter spezielle Namen und Abkürzungen besitzen, welche benutzt werden sollten, um die GUI allgemein verständlich zu halten. Ausserdem ist die Darstellung von Gattern auf einem sogenannten \glqq Wirediagramm\grqq{} allgemein üblich. Ein Wirediagramm teilt die möglichen Gatterplatzierungen auf $N$ Qubits und $M$ Zeitabschnitte auf. Die Gatter im Wirediagramm werden dann nacheinander auf die korrespondierenden Qubits angewendet. In den obigen Bildern wirken also zuerst zwei Hadamard-Gatter auf Qubit eins und zwei, dann zwei Phase-S-Gatter und so weiter.
+Für das Programmieren der Quantencomputersimulators wurde aufgrund des umfassenden Vorwissens durch den Schullehrplan die Programmierbasissprache Java\footnote{Oracle, Java SE Development Kit 8, März 2014} verwendet. Processing\footnote{Ben Fry, Casey Reas, Processing 3.0, September 2015}, eine quelloffene (open source) Entwicklungsumgebung und Programmiersprache mit Schwerpunkten auf Animation und Grafik, wurde zusätzlich für einen einfacheren Visualisierungscode eingebunden.
+
+\section{Programmstruktur und Zustandsberechnung}
+
+%http://openbook.rheinwerk-verlag.de/javainsel9/javainsel_03_001.htm#mjcd3b5720e8605484942e3476a1075bdf
+%https://www.teialehrbuch.de/Kostenlose-Kurse/JAVA/6587-Objektorientierte-Programmierung.html
+%instanziiert ist richtig
+Java ist eine objektorientierte Programmiersprache, weswegen Objektorientierung zur
+\\ % <- WEGMACHEN WENN ES GEHT
+Übersichtlichkeit und Funktionstüchtigkeit von in Java geschriebenen Programmen ab gewissen Größen von elementarer Bedeutung ist.
+Objektorientierte Programmierung baut ein Programm als Zusammenspiel einzelner Objekte auf, welche eigene Daten(Attribute) und ausführbaren Code(Methoden) besitzen und durch Klassen mithilfe spezieller Ausgangsvariablen instanziiert werden. Nimmt man Qubits als Beispiel, dann stellt der Vorgang der Erstellung eines neuen Qubits die abstrakte Klasse dar. Möchte man nun ein neues Qubit, also ein Objekt der Klasse, erzeugen, dann gibt man als Ausgangsvariablen den Startzustand des Qubits an, damit durch den Erstellungsvorgang ein neues Qubit erzeugt werden kann.  Der Vorgang ist dadurch jedoch nicht verbraucht, denn durch neue Ausgangsvariablen können weiterhin neue Qubits erzeugt werden und parallel existieren.\\
+Betrachtet man nun die gesamten Ausgangsqubits, dann besitzen sie eine festgelegte Anzahl und  einen festgelegten Zustand und können mit Gattern interagieren. Dies sind die Attribute und Methoden des Objektes \glqq Qubits\grqq. Außerdem besteht es aus den einzelnen Qubits, welche wiederum als Objekte mit eigenen Attributen und Methoden fungieren, die als einzelne Attribute der Qubitgesamtheit gelten und darin gebunden sind.\\
+Die Simulation funktioniert auf diese Weise mit 7 teilweise ineinander verschachtelten Klassen, welche durch das unten aufgeführte Klassendiagramm modelliert werden.
+\begin{figure}
+	\centering
+	\vspace{-1.8cm}
+	\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth, height=1.07\textheight]{a4p.png}}	
+	\centering
+	\caption{Klassendiagramm der Quantencomputersimulation}
+\end{figure}
+\newpage
+\subsection{C}
+Die \glqq C\grqq{}-Klasse ist als Darstellung von komplexen Zahlen die Basis der Quantencomputersimulation, da Qubits universell nur durch 2 komplexe Zahlen modelliert werden können. Diese sind in Java nicht standardmäßig implementiert, weswegen selbst eine Klasse programmiert werden musste. Jedes Objekt der Klasse besitzt als Attribute je eine Fließkommazahl zur Beschreibung des Realteils $r$ und des Imaginärteils $i$, um eine komplexe Zahl der Form $r+i\sqrt{-1}$ zu simulieren.
+Berechnungen können durch bekannte mathematische Gleichungen im komplexen Raum durchgeführt werden\footnote{Eric W. Weisstein, 2003, S.1}.
+\begin{align}
+	\Re(r+i\sqrt{-1}) &= r & Realteil\\
+	\Im(r+i\sqrt{-1}) &= i & Imagin\ddot{a} rteil\\
+	(a+b\sqrt{-1}) + (r+i\sqrt{-1}) &= ((a+r)+(b+i)\sqrt{-1}) & Summe\\
+	(a+b\sqrt{-1}) \cdot (r+i\sqrt{-1}) &= ((ar-bi)+(ai+br)\sqrt{-1}) & Produkt\\
+	\overline{r+i\sqrt{-1}} &= r-i\sqrt{-1} & komplexes~Konjugat\\
+	|r+i\sqrt{-1}|^2 &= (r^2+i^2)+0\sqrt{-1} = r^2+i^2 & Absolutes~Quadrat\\
+	r:=a,~ i:=b,~ r+i\sqrt{-1} &= a+b\sqrt{-1} & Zuweisung
+\end{align}
+Hierbei ist $\sqrt{-1}$ als imaginäre Einheit für die Implementation nicht nötig, da keine komplexen Zahlen verwendet, sondern nur via Neuzuweisungen oder Ausgaben von Attributen des \glqq C\grqq{}-Objektes durch Methoden simuliert werden.
+\begin{align}
+	(r,i).r &:= r & (r,i).i &:= i \\
+	(r,i).c\_conjugate &:= (r,-i) & (r,i).update(a,b) &:= (a,b) \\
+	(r,i).sum(a,b) &:= (a+r,b+i) & (r,i).product(a,b) &:= (ar-bi,ai+br)\\ 
+	(r,i).cc\_square &:= (r^2+i^2,0) & (r,i).float\_cc\_square &:= r^2+i^2
+\end{align}
+
+\subsection{Gates}
+Die \glqq Gates\grqq{}-Klasse ist als Sammel-Speicher der einzelnen Gatter die Basis der \glqq Gate\grqq{}-Klasse, da sie die einzelnen Gatter frei zur Verfügung stellt. Hierbei benutzt sie \glqq C\grqq{}-Objekte, da jedes Gatter durch komplexe Zahlen beschrieben wird\footnote{Kapitel 2.3 Quantengatter}, und speichert jedes dieser Gatter als zweidimensionales Array.
+\begin{align}
+	\text{Bsp: }\textbf{S} = \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} = 
+	\begin{bmatrix} 1+0i & 0+0i \\ 0+0i & 0+i \end{bmatrix} &\Longrightarrow
+	\begin{bmatrix}
+		~\vspace{-0.5cm} \\ 
+		\begin{bmatrix} (1,0) , (0,0) \end{bmatrix},
+		\begin{bmatrix} (0,0) , (0,1) \end{bmatrix}
+		\\ ~\vspace{-0.5cm}
+	\end{bmatrix}
+\end{align}
+Das C-Not Gatter nimmt wieder eine Sonderrolle ein, da es nicht vorher definierbar ist, sondern durch 3 Parameter bestimmt wird, welche sich bei jedem C-Not Gatter erst während der Platzierung ergeben. Deswegen wird es durch eine eigene Methode neu generiert, welche wegen ihrer Komplexität in die Main ausgelagert wurde.
+
+\subsection{Gate}
+Die \glqq Gate\grqq{}-Klasse speichert genau ein Gatter aus der \glqq Gates\grqq{}-Klasse und kann dieses Gatter ausgeben. Es unterscheidet zusätzlich noch zwischen 2 Kategorien von Gattern, dem C-Not Gatter und allen anderen Gattern. Dies geschieht, da diese beiden Arten von Gattern unterschiedliche Größen aufweisen. Das C-Not Gatter besteht aus Arrays der Länge $2^N$, während alle anderen Gatter aus Arrays der Länge $2$ aufgebaut sind. Man benötigt also $N$ normale Gatter, um ein Gatter derselben Größe zu erreichen, weswegen das C-Not Gatter extra betrachtet werden muss.
+
+\subsection{Qubitscore\_timestep \& Qubitscore}
+Jedes Objekt der \glqq Qubitscore\_timestep\grqq{}-Klasse stellt einen Zeitabschnitt im Wirediagramm dar. Es unterteilt sich in $N$ Gatter, welche jeweils mit einem Qubit korrespondieren. Während der Ausgabeberechnung führt es eine Multiplikation mit dem Objekt der \glqq Qubits\grqq{}-Klasse aus.
+Um dies umzusetzen, benötigt es eine Matrix $P$ der Größe $2^N$ und muss deswegen entweder ein C-Not Gatter $Q_{C-Not}$ oder bis zu $N$ andere Gatter $Q_x$ enthalten, um nach einer Kroneckermultiplikation die richtige Größe aufzuweisen.
+\begin{align}
+P &=
+  \begin{cases}
+    Q_{C-Not} & \hspace{2.64cm} \text{\textit{for} P.cnot\_stored()==true}\\
+    \begin{matrix}
+    	\vspace{-0.25cm}\\
+    	\prod_{n=1}^{N}\vspace{-0.2cm}\\
+    	\text{\tiny{Kronecker}}
+    \end{matrix}
+    Q_{n} &\Big{\vert~}Q_{n}=
+    \begin{cases}
+      Q_{n} & \text{\textit{for} P.has\_other(n)==true}\\
+      \textbf{I} & \text{\textit{for} P.has\_other(n)==false}
+    \end{cases}
+  \end{cases}
+\end{align}
+Das Objekt der \glqq Qubitscore\_timestep\grqq{}-Klasse stellt das gesamte Wirediagramm dar, ist hauptsächlich zum Zusammenfassen der einzelnen Qubitscore\_timesteps gedacht und leitet \glqq Getter\grqq{} und \glqq Setter\grqq\footnote{Methoden zum Entgegennehmen und Verändern von Objektattributen} des Codes zum Erstellen der visuellen Repräsentation auf diese weiter.
+\begin{figure}%[h]
+\includegraphics[width=\textwidth]{dia-qs.png}
+\caption{Hierarchie des Qubitscores}
+\end{figure}
+\subsection{Qubits}
+Die \glqq Qubits\grqq{}-Klasse verwendet $2^{N}$ komplexe Objekte, um die $N$ benötigten Qubits mathematisch korrekt darzustellen. Diese Liste stellt das Kroneckerprodukt aus allen einzelnen Qubitmatrizen dar und enthält je einen Eintrag für das Produkt der Elemente jeder möglichen Permutation von $N$ der $2N$ Elemente $\alpha_1$ bis $\alpha_{N}$ und $\beta_1$ bis $\beta_{N}$.\footnote{Kapitel 2.2.1 Mathematische Grundlagen} Beginnt die Berechnung des vom Nutzer erstellten Programms, dann wird nacheinander jedes der $M$ Gesamtgatter mit dem Kroneckerprodukt der Qubits, also dem Gesamtqubitzustand multipliziert, um am Ende die Ausgabedaten zu erhalten. Beide Arten der Matrixmultiplikation wurden allerdings aufgrund ihrer Komplexität nicht objektintern geregelt, sondern wieder in die Main als Methoden ausgelagert. Das \glqq Qubits\grqq{}-Objekt ist die passive Eingabe, auf die andere Objekte einwirken, wodurch es schließlich zur Ausgabe wird. Danach werden die einzelnen Wahrscheinlichkeiten als absolutes Quadrat der einzelnen Teilsuperpositionszustände an die Main übergeben und optional sowohl die Amplituden als auch die Wahrscheinlichkeiten ebendieser auf der Konsole ausgegeben.
+
+\subsection{Main}
+Ein Teil der \glqq Main\grqq{}-Klasse stellt die Übersicht über alle anderen Objekte jeder Klasse dar, regelt den groben Ablauf des Programmes und sorgt für die Berechnung des Ausgabesuperpositionszustandes. Der andere Teil beherbergt die ausgelagerten Methoden.
+\lstset{escapechar=@,style=customc}
+\begin{lstlisting}
+float[] state_calculator() {
+  // Dem Qubitscore werden alle Gatterpositionen und Gatterarten uebergeben.
+  Qubitscore QS = Gatterspeicher.getData();
+  // Das Kroneckerprodukt der einzelnen Qubitscore_timesteps wird berechnet.
+  c[][][] after_kronecker = new c[M[(int) pow(2, N)][(int) pow(2, N)];
+  for (int i=0; i<M; i++) {
+  	// Spezialfall: C-Not Gatter
+  	// In diesem Fall kann man einfach kopieren.
+    if (QS.has_cnot(i) == true) {
+      after_kronecker[i] = QS.get_cnot(i);
+    }
+    // Normalfall: gewöhnliche Gatter
+    // In diesem Fall muss man das Kroneckerprodukt berechen.
+    else {
+      c[][][] normal_gates = new c[N][][];
+      for (int j=0; j<normal_gates.length; j++) {
+        normal_gates[j] = QS.get_other(j, i);
+      }
+      after_kronecker[i] = kronecker_mult(normal_gates);
+    }
+  }
+  // Das Matrixprodukt aus Qubits und Qubitscore_timesteps wird berechnet.
+  Qubits after_product = new Qubits(SCOREWIDTH);
+  after_product = matrix_mult(qubits, after_kronecker);
+  // Die Endwahrscheinlichkeiten werden zurückgegeben.
+  return after_product.getProbabilities();
+}
+\end{lstlisting}
+\newpage
+
+
+
+\subsubsection{Kroneckerprodukt}
+Die Methode zum Berechnen des Kroneckerprodukts ist für ihre Aufgabe zweigeteilt.
+Der erste Teil empfängt eine Liste von Matrizen, teilt diese auf und übergibt sie nacheinander immer wieder dem zweiten Teil. Dieser iteriert dann über beide Arrays und schreibt die Produkte der einzelnen Arrayelemente in das Ausgabearray. Das Ausgabearray wird durch den ersten Teil mit einer weiteren Matrix neu übergeben, bis alle vorhandenen Matrizen genutzt wurden.\\
+\vspace{-0.7cm}\\
+\lstset{escapechar=@,style=customcsmall}
+\noindent\begin{minipage}[t]{.50\textwidth} 
+\hspace*{0pt}
+\begin{lstlisting} 
+// Kroneckerprodukt von 2 Matrizen
+c[][] kronecker_2(c[][] to, c[][] from) {
+  // Instanziierung des Ausgabearrays
+  c[][] output = new c[to.length*from.length] [to[0].length*from[0].length];
+  // Iteration über Array "to"
+  for (int i=0; i<to.length; i++){
+  for (int j=0; j<to[0].length; j++){
+    // Iteration über Array "from"
+    for (int k=0; k<from.length; k++){    
+    for (int l=0; l<from[0].length; l++){
+      // Berechnung der Koordinaten des einzelnen Ergebnisses im Ausgabearray dortiges Eintragen
+      int y = i*from.length + k;
+      int x = j*from[0].length + l;
+      out[y][x]=to[i][j].product(from[k][l]);
+  }}}}
+  // Ausgabe des Ausgabearrays
+  return out;
+}
+\end{lstlisting} 
+\end{minipage}
+\hfill \hspace{0.2cm}
+\begin{minipage}[t]{.49\textwidth} 
+\hspace*{0pt}\begin{lstlisting}
+// Kroneckerprodukt von n Matrizen
+c[][] kronecker_mult(c[][][] input) {
+  // Sonderfall: 2 Matrizen
+  if (input.length==2) {
+    // Matrizenübergabe an kronecker_2 Methode und Rückgabe des Ergebnisses
+    return kronecker_2(input[0], input[1]);
+  // Normalfall: mehrere Matrizen
+  } else {
+    // Sequenzielle Matrizenübergabe an kronecker_2 Methode und Wiederverwendung der Rückgabe
+    c[][] first = input[0];
+    c[][][] rest = new c[input.length-1][][];
+    for (int i=1; i<input.length; i++) {
+      rest[i-1] = input[i];
+    }
+    // Ausgabe des Endergebnisses
+    return kronecker_2(first, kronecker_mult(rest));
+}}
+\end{lstlisting} 
+\end{minipage}
+
+\subsubsection{Matrixprodukt}
+Die Methode zum Berechnen des Matrixproduktes funktioniert analog zu der des Kroneckerproduktes.
+Sie erstellt das Ausgabearray jedoch basierend auf den Größen der Eingabearrays und bildet für jedes Element die Summe aus den einzelnen benötigten Produkten, um sie in das Ausgabearray zu schreiben.\\
+\vspace{-0.7cm}\\
+\lstset{escapechar=@,style=customcsmall}
+\noindent\begin{minipage}[t]{.60\textwidth} 
+\hspace*{0pt}
+\begin{lstlisting}
+//Matrixprodukt von 2 Matrizen
+Qubits matrix_mult_2(Qubits qb, c[][] kgate) {
+  // Instanziierung der zu multiplizierenden Matrizen
+  c[] q = qb.getArray();
+  c[] out = new c[q.length];
+  // Iteration über das Ausgabearray und Summierung der einzelnen Produkte
+  for (int m=0; m<kgate.length; m++) {
+    c partSum = new c(0, 0);
+    for (int n=0; n<kgate[0].length; n++) {
+      partSum = partSum.sum(q[n].product(kgate[m][n]));
+    }
+    // Eintragen der jeweiligen Produktsummen
+    out[m] = partSum;
+  }
+  // Ausgabe des upgedateten "Qubits" Objekts
+  qb.update(out);
+  return qb;
+}
+\end{lstlisting} 
+\end{minipage}
+\hfill \hspace{0.2cm}
+\begin{minipage}[t]{.39\textwidth} 
+\hspace*{0pt}
+\begin{lstlisting}
+// Matrixprodukt von n Matrizen
+Qubits matrix_mult
+    (Qubits qb, c[][][] kgates) {
+  // Sequenzielle Matrizenübergabe an matrix_mult_2 Methode und Wiederverwendung der Rückgabe
+  for(int i=0;i<kgates.length;i++){
+    qb=matrix_mult_2(qb,kgates[i]);
+  }
+  // Ausgabe des "Qubits" Objektes nach Matrixmultiplikation mit jedem Kroneckergatter
+  return qb;
+}
+
+
+
+																								-
+\end{lstlisting} 
+\end{minipage}
+
+\subsubsection{C-Not Gatterberechnung}
+Die Methode zum Erstellen des C-Not Gatters kann durch einen Vergleichsalgorithmus von einer normalen Qubitzustandsliste und dieser nach Anwendung der Veränderung durch Kontrollqubit und Zielqubit das gesuchte Gatter bestimmen, indem sie untersucht, welcher Zustand wohin übergeht.
+\lstset{escapechar=@,style=customcsmall}
+\begin{lstlisting}
+// Pseudocode
+c[][] cnot_builder(N, Kontrollqubit, Zielqubit) {
+  // Erstellen zweier Arrays mit Zustaenden abhaengig vom C-Not Gatter
+  int[][] davor = new int[2^N][N]; 	// Zustaende davor
+  int[][] danach = new int[2^N][N];	// Zustaende danach
+  // Mit dem Stellenwertsystem und den binaeren Zahlen lassen sich Qubitzustandsarten darstellen: |0110> => 0110 => 6
+  // Durch diese Vorgehensweise werden alle Qubitzustandsarten im "davor" Array aufgelistet
+  for (zaehler = 0 bis 2^N) {
+    int binaer_zaehler = binary(zaehler);   
+    for (j = 0 bis 2^N) {
+      davor[i][j] = binaer_zaehler%10;
+      binaer_zaehler = binaer_zaehler/10;
+  }}
+  // "danach" analog zu "davor", aber falls der Zustand des Kontrollqubits 1 ist, wird dar Zielqubitzustand invertiert
+  for (i = 0 bis 2^N) {
+    danach[i] = davor[i];
+    if (davor[i][Kontrollqubit]==1) {
+      if      (danach[i][Zielqubit]==1) danach[i][Zielqubit]=0;
+      else if (danach[i][Zielqubit]==0) danach[i][Zielqubit]=1;
+  }}
+  // Vergleichsarray, welches parallel die Position jeder Qubitzustandsart im "davor" und "danach" Array speichert
+  int[][] aenderung = new int[2^N][2]; 
+  for (position_1,position_2 = 0 bis 2^N) {
+      if (davor[position1] = danach[position_2]) {
+        aenderung[position_1][0]=position_1; 
+        aenderung[position_1][1]=position_2;
+  }}
+  // Erstellung des Basisarrays für das C-Not Gatter der Größe 2^N
+  c[][] output = new c[2^N][2^N];
+  for (i,j = 0 bis 2^N) {
+      output[i][j] = new c(0, 0);
+  }
+  // Einfügen der Einsen an den richtigen Stellen mithilfe des "aenderung" Arrays
+  for (i = 0 bis 2^N) {
+    output[ aenderung[i][0] ][ aenderung[i][1] ] = 1;
+  }
+  // Ausgabe des fertigen C-Not Gatters
+  return output;
+}
+\end{lstlisting}
+
+\section{GUI}
+Die GUI stellt die Nutzeroberfläche der Quantencomputersimulation dar und sollte möglichst intuitiv zu bedienen sein. Aus diesem Grund wurde eine rein auf der Maus als Eingabegerät basierende Oberfläche implementiert, mit welcher man über Click oder Click \& Drop interagieren kann. Das Interagieren erfolgt mit der linken Maustaste, das Bestätigen mit der rechten Maustaste und das Beenden über die Escape-Taste. Die GUI ist in zwei Teile geteilt: vor der Berechnung des Endsuperpositionszustandes mit Fokus auf Eingabe und Manipulation des Qubitscores und danach mit Fokus auf klarer Informationsdarstellung.
+
+\subsection{Eingabe}
+\begin{figure}[h]
+		\centering
+		\begin{subfigure}{.49\textwidth}
+		\centering
+  		\includegraphics[width=0.9\linewidth, height=0.16\textheight]{eingabe1.jpg}
+ 	 	\caption{\begin{footnotesize}
+ 	 	Auswahl der Qubit- und Zeitabschnittsanzahl
+ 	 	\end{footnotesize}}
+		\end{subfigure}
+		\begin{subfigure}{.49\textwidth}
+  		\centering
+ 	 	\includegraphics[width=0.9\linewidth, height=0.16\textheight]{eingabe2.jpg}
+ 	 	\caption{\begin{footnotesize}
+ 	 	Quantumscore Nutzeroberfläche
+ 	 	\end{footnotesize}}
+		\end{subfigure}
+		\caption{Graphische Benutzeroberflächen des Eingabeteils}
+\end{figure} ~\newline \vspace{-0.95cm}\\
+Der Eingabeteil ist wiederum in zwei Unterkategorien gegliedert. Das erste Element ist der Auswahlbildschirm, auf dem man 1 bis 20 Zeitabschnitten und 2 bis 5 parallele Qubits einstellen kann. Wurde dies gemacht, dann wird das zweite Element angezeigt, ein Qubitscore mit der gewählten Anzahl an Zeitabschnitten und Qubits. Auf diesem kann man nun seine Gatter frei platzieren. Die einzige Einschränkung stellt die Regel dar, dass nur ein C-Not Gatter oder $N$ andere Gatter gleichzeitig einen Zeitabschnitt belegen dürfen. Bestätigt man nun seine Eingabe, dann wird der Endsuperpositionszustand berechnet und man gelangt in den Ausgabeteil.
+	
+\subsection{Ausgabe}
+\begin{figure}[h]
+		\centering
+		\begin{subfigure}{.49\textwidth}
+		\centering
+  		\includegraphics[width=0.9\linewidth, height=0.16\textheight]{ausgabe1.jpg}
+ 	 	\caption{\begin{footnotesize}
+ 	 	Wahrscheinlichkeit jedes Qubitzustandes
+ 	 	\end{footnotesize}}
+		\end{subfigure}
+		\begin{subfigure}{.49\textwidth}
+  		\centering
+ 	 	\includegraphics[width=0.9\linewidth, height=0.16\textheight]{ausgabe2.jpg}
+ 	 	\caption{\begin{footnotesize}
+ 	 	Zustandswahrscheinlichkeit von jedem Qubit
+ 	 	\end{footnotesize}}
+		\end{subfigure}
+		\caption{Graphische Benutzeroberflächen des Ausgabeteils}
+\end{figure} ~\newline \vspace{-0.95cm}\\ 
+Auch der nach der Berechnung angezeigte Ausgabeteil besteht aus zwei Unterkategorien: einem Diagramm zur Verdeutlichung der Wahrscheinlichkeit von jedem möglichen erreichbaren Qubitzustand und einem Diagramm zur Verdeutlichung der Zustandswahrscheinlichkeit von jedem Qubit.
+Wendet man also die oben gezeigten Gatter auf die Qubits an, so sieht man, dass nur
+$ \ket{0000},\ket{0011},\ket{1100},\ket{1111} $ als Zustände mit den gleichen Wahrscheinlichkeiten von 25\% auftreten können. Außerdem hat jedes Qubit eine Wahrscheinlichkeit von 50\%, selbst im Zustand $\ket{0}$ oder $\ket{1}$ aufzutreten.
+
+\end{document}
+
+
+% 2x2 Matrizen
+% complexe Zahlen
+% http://www.zdnet.de/wp-content/uploads/2016/05/ibm-quantencomputing-dashboard.jpg
+% siehe Quellcode
+

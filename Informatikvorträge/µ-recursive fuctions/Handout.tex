@@ -1,0 +1,189 @@
+% Fachkonferenz Informatik des CZG
+% Handout zum Vortrag im Rahmen des Spezi-Abiturs
+% -----------------------------------------------------------------------
+% Präambel (head)
+\documentclass[a4paper,12pt]{scrreprt}
+
+% Standardpakete
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{pgfplots}
+
+% Zusatzpakete
+\usepackage[affil-it]{authblk}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+% Definitionen und Beispiele ohne Nummerierungen einbinden
+\usepackage{ntheorem}
+\newtheorem*{defi}{Definition}
+\newtheorem*{bsp}{Examples}
+
+% Darstellung von URLs
+\usepackage{hyperref}
+
+% seitliche Abbildungsbeschriftung
+\usepackage{sidecap}
+
+% Bilder und Grafiken nebeneinander
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Nummerierung der Abbildungen
+\usepackage{tocloft}
+\renewcommand{\cftfigpresnum}{Abb. }
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\cftfigaftersnum}{:}
+\setlength{\cftfignumwidth}{2cm}
+\setlength{\cftfigindent}{0cm}
+\setlength{\textheight}{1.1\textheight}
+% Einrücktiefe 0
+\parindent=0pt
+
+% Titelseite
+% Logo in die Titelseite einbinden
+\titlehead{
+	\centering
+	\includegraphics[width=3cm]{czg.png}% 
+}
+\subject{Computer Science Presentation}
+\title{$\mu$ - recursive functions}
+\author{Philip Geissler}
+\affil{Carl-Zeiss Grammar School}
+% Vortragsdatum:
+% \today setzt das Datum des letzten Übersetzens
+% statt \today kann ein konkretes Datum gesetzt werden
+\date{Jena, 17th of November}
+\publishers{Kai Rodeck}
+%-----------------------------------------------------------------------
+
+% Text (body)
+\begin{document}
+
+% Titelseite einbinden	
+\maketitle	
+% -----------------------------------------------------------------------
+
+% zweite Seite
+% Gliederung - nur Hauptpunkte des Vortrags aufführen
+\section*{Structure}
+\begin{enumerate}
+	\item Computability
+	\item $\mu$ - recursive functions
+	\begin{itemize}
+		\item Explanation of terms
+		\item Initial functions
+		\item recursion / composition / $\mu$-operator
+	\end{itemize}
+	\item Examples for primitive and $\mu$ recursion functions
+\end{enumerate}
+
+\section*{Theory of Computability}
+\subsection*{Definition of computability}
+A function $f(x_1,x_2,\cdots,x_n)$ is computable if there exists an algoritm $A(x_1,x_2,\cdots,x_n)$ following given rules, that solves f in its domain and gives no output otherwise.\\ \\
+$(x_1,x_2,\cdots,x_n) \in D_f \Longrightarrow  A(x_1,x_2,\cdots,x_n) = f(x_1,x_2,\cdots,x_n)$\\
+$(x_1,x_2,\cdots,x_n) \notin D_f \Longrightarrow  A(x_1,x_2,\cdots,x_n) = \textbf{ENDLESS LOOP}$\\
+
+\subsection*{Theories of computability}
+\begin{itemize}
+\item{turing machines}
+\item LOOP-programs (incomplete)
+\item{GOTO-programs}
+\item{WHILE-programs}
+\item{$\lambda$-calculus}
+\item{} primitive recursive functions (incomplete)
+\item{} $\mu$-recursive functions
+\end{itemize}
+
+% Hier die Grafik einfügen!!!!
+\begin{figure}[h]
+\begin{tikzpicture}[scale=1.3]
+\node (A) at (-2,1){$\mu$ - recursive functions};
+\node (B) at (2,1){primitive recursive functions};
+\node (C) at (2,0){LOOP-programs};
+\node (D) at (-2,0){WHILE-programs};
+\node (E) at (-4,-1){GOTO-programs};
+\node (F) at (-1,-1){Turing machines};
+
+\draw[<-] (A) edge (B);
+\draw[<->] (A) edge (D);
+\draw[<->] (C) edge (B);
+\draw[->] (C) edge (D);
+\draw[<->] (D) edge[bend right=30] (E);
+\draw[<->] (F) edge[bend right=30] (D);
+\draw[<->] (E) edge[bend right=30] (F);
+
+\end{tikzpicture}
+\end{figure}
+
+% Seitenumbruch
+\newpage
+% -----------------------------------------------------------------------
+% zweite Seite
+\section*{Building-Block functions}
+\subsection*{Constant function}
+$N(X_0,x_1,x_2,\cdots,x_n)$:\\
+$N(x_1,x_2,\cdots,x_n) = const. $
+\subsection*{Successor function}
+$S(x_1)$:\\
+$S(x_1) = x_1 + 1$
+\subsection*{Projection function}
+$P_m^n(x_1,x_2,\cdots,x_n)$:\\
+$P_m^n(x_1,x_2,\cdots,x_m,\cdots,x_n) = x_m$
+\subsection*{Composition function}
+$C(x_1,x_2,\cdots,x_n)$:\\
+$f_n = f_n(x_1,x_2,\cdots,x_n) $\\
+$f_{m,k} = f_{m,k}(x_1,x_2,\cdots,x_m) $\\
+$C = f_n \circ (f_{m,1},f_{m,2},\cdots,f_{m,n})$\\
+$C= f_n(f_{m,1}(x_{1,1},x_{1,2},\cdots,x_{1,m}),\cdots,f_{m,n}(x_{n,1},x_{n,2},\cdots,x_{n,m}))$
+\subsection*{Primitive recursion function}
+$R(X_0,x_1,x_2,\cdots,x_n)$:\\
+$X_0=0 \Longrightarrow ~ R(X_0,x_1,x_2,\cdots,x_n) = f(y_1,\cdots,y_m)$\\
+$X_0\neq0 \Longrightarrow ~ R(X_0,x_1,x_2,\cdots,x_n) = g(R(X_0-1,x_1,\cdots,x_n),z_1,\cdots,z_l)$
+\subsection*{$\mu$ minimisation function}
+$\mu(X_0,x_1,x_2,\cdots,x_n)$:\\
+$0 = f(z,y_1,y_2,\cdots,y_n) $\\
+$\wedge~ 0< f(i,y_1,y_2,\cdots,y_n)$\\
+$\Longleftrightarrow z = \mu(f(Y_0,y_1,y_2,\cdots,y_n),x_1,x_2,\cdots,x_n)$
+%------------------------------------------------------------------------
+
+\newpage
+	\begin{thebibliography}{xxxx}
+		\bibitem[Access Date]{}
+			\today
+		\bibitem[Picture]{}
+			URL: \url{https://goo.gl/gRrDGH}
+		\bibitem[Overall]{}
+			URL: \url{https://goo.gl/yWvinS}
+		\bibitem[Overall]{}
+			URL: \url{https://goo.gl/awUSfB}
+		\bibitem[Overall]{}
+			URL: \url{https://goo.gl/xRPCiU}
+		\bibitem[Overall]{}
+			URL: \url{https://goo.gl/K4LKQB}
+		\bibitem[Overall]{}
+			URL: \url{https://goo.gl/XudPdL}
+		\bibitem[Overall]{}
+			U.Schöning, Theoretische Informatik kurz gefasst, 2008, Spektrum
+
+			
+	
+\end{thebibliography}
+% -----------------------------------------------------------------------
+\end{document}
+
+
+%%% http://marslanalam.blogspot.de/2012/08/jpeg-mpeg-compression.html
+%%7
+%%
+%%gtrrtnj8rhugzhubhzg
+%%dhjufkbwgtngebtkg
+%zghuiugzhujokitrhuijotk
+%fghih57uji6
+%
+%
+%
+'

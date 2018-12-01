@@ -1,0 +1,21 @@
+0. Titel
+1. Was ist Lemmings und wie funktioniert es?
+-> wenn da durch:
+2. Gliederung
+3. Formalisierung
+    - Lemmings ist diskret -> grid & Timesteps
+    - tupel
+4. Komplexität:
+    4.1. Lemmings is NP
+        - Proof durch Tupelablauf
+    4.2. Lemmings ist NP-Hart
+        - gg
+    4.3. -> NP /\ NP-Hart -> Lemmings ist NP-complete
+(5. Einzellemmings)
+6. Conclusions & Dank
+    - Andere Varianten
+    - ... TODO
+    
+    - Der dud mitm Paper
+7. Quellen
+8. (0) Titel

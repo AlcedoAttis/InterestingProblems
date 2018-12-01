@@ -1,0 +1,42 @@
+\documentclass[a4paper, 12pt]{scrartcl} % pt macht schriftgroesse
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{enumitem}
+
+
+\pagenumbering{gobble} % macht seitennummerierung aus
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}}
+
+\def\arraystretch{1.5}    %nicht
+\setlength{\parskip}{0pt} %kaputtmachen	
+
+\begin{document}
+
+\title{Qubits als Bestandteile von Quantencomputern}
+\author{Philip Geißler, Joe Schaller, Alexander von Mach}
+\date{10. Januar 2018}
+
+\maketitle
+
+
+Die Entwicklung und die Weiterentwicklung von Computern ist von großer Bedeutung für unsere digitalisierte Welt. Doch da man mit der Verbesserung der bisherigen Umsetzungen an die physikalischen Grenzen stößt und das Mooresche Gesetz\footnote{Das Moorsche Gesetz besagt, dass sich die Anzahl der Transistoren und damit die Rechenstärke von Computern alle 1-2 Jahre verdoppelt} bald nicht mehr erfüllen kann, wird seit einigen Jahren intensiv an einer Alternative für spezielle Aufgaben geforscht. Ein Quantencomputer soll zum Beispiel in der Lage sein, Texte in Bruchteilen einer Sekunde zu entschlüsseln, die mit heutigen Methoden der Kryptographie verschlüsselt worden sind.
+Die Qubits sind dabei der Kern des Quantenrechners und dienen der Datenverarbeitung. Diese Qubits verhalten sich jedoch anders als ein normales Bit.
+Im Rahmen dieser Arbeit wurden die Phänomene des Quantencomputers erläutert, die Unterschiede zu bisherigen Umsetzungen der Datenverarbeitung herausgearbeitet und eine Simulation eines Quantencomputers erstellt, die in exponentiell längerer Zeit einen Quantencomputer identisch darstellt.
+\newline
+
+
+\begin{itemize}
+\item[•]Quantencomputer können spezielle Probleme sehr viel schneller lösen als normale Rechner.
+\item[•]Qubits besitzen die Möglichkeit, Zustände \glqq zwischen\grqq{} 1 und 0 anzunehmen.
+\item[•]Weiterhin können Qubits miteinander so interagieren, das man mithilfe des ersten Qubits Aussagen über den Zustand des zweiten Qubits treffen kann.
+\item[•]Durch ebendiese Eigenschaften von Qubits sind Quantencomputer auch für geheimdienste relevant. 
+\item[•]Die Forschung an Quantencomputern erlebt zurzeit einen starken Zuwachs.
+\item[•]Eine Quantencomputersimulation stellt Eigenschaften und Verhaltensweisen von Quantencomputern mithilfe konventioneller Methoden dar.
+
+\end{itemize}
+\end{document}

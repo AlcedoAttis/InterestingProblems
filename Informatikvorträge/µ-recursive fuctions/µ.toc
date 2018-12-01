@@ -1,0 +1,10 @@
+\select@language {english}
+\contentsline {section}{Abstract: computability}
+\beamer@sectionintoc {1}{$\mu $ - recursive functions}{10}{0}{1}
+\beamer@subsectionintoc {1}{1}{Definition and Disambiguation}{11}{0}{1}
+\beamer@subsectionintoc {1}{2}{Basic mathematical understanding}{20}{0}{1}
+\beamer@subsectionintoc {1}{3}{Initial functions}{25}{0}{1}
+\beamer@subsectionintoc {1}{4}{Composition function}{28}{0}{1}
+\beamer@subsectionintoc {1}{5}{Primitive recursion function}{29}{0}{1}
+\beamer@subsectionintoc {1}{6}{$\mu $ minimisation function}{39}{0}{1}
+\beamer@sectionintoc {2}{Appendix: computability}{43}{0}{2}

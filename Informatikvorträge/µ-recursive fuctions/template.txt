@@ -1,0 +1,243 @@
+ 
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\title{Gödels Incompleteness Theorems}   
+\author{Max Christoph Reinhardt} 
+\date{29.5.2017} 
+
+\usetheme{metropolis}
+\usepackage{mathtools}
+
+\begin{document}
+
+
+\frame{\titlepage}
+
+\begin{frame}
+\begin{center}
+\Hugeŝ
+$ 2+2=4.001 $ ?
+\end{center}
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\begin{frame}
+\section{Overview}
+\end{frame}
+
+\begin{frame}
+%\begin{figure}[htb]
+%    \begin{minipage}{0.6\textwidth}
+%    	\includegraphics[scale=0.2]{g.png}
+%		\caption{Original paper \url{https://goo.gl/eQc2yh}}
+%    \end{minipage}\hfill
+%    \begin{minipage}{0.4\textwidth}  
+%      	\includegraphics[scale=0.5]{Kurt_goedel.jpg}
+%		\caption{Kurt Gödel \url{https://goo.gl/7N0NMi}}
+%    \end{minipage}\hfill
+%\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\section{First Incompleteness Theorem}
+\end{frame}
+
+\begin{frame}
+%\subsection{Theorem}
+%\frametitle{Theorem}
+%"Any consistent formal system F within which a certain amount of elementary arithmetic can be carried out is incomplete; i.e., there are statements of the language of F which can neither be proved nor disproved in F."
+%\end{frame}
+%
+%\begin{frame}
+%\subsection{Axioms}
+%\frametitle{Axioms}
+%\center
+%\begin{figure}
+%\includegraphics[scale=0.1]{house.png}
+%\caption{\url{https://goo.gl/uuqaTS}}
+%\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Peano-Axioms}
+\center
+\begin{itemize}
+\item 0 is a natural number
+\item Every natural number $n$ has a successor $n_1$
+\item 0 is no successor of a natural number
+\item natural numbers with the same successor are equal
+\item If $X$ contains the 0 and with every natural number $n$ also its successor $n '$, the natural numbers form a subset of $X$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\subsection{Consistency}
+\frametitle{Consistency}
+\begin{align}
+a &= b && |* a \\
+a^2 & = ab && |-b^2 \\
+a^2 - b^2 & = ab - b^2 \\
+(a+b)*(a-b) & = b * (a-b) && | /(a-b) \\
+a+b & =b && | a=b \\
+2b & = b && | / b \\
+2 & = 1 &&
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+\subsection{Formal-System}
+\frametitle{Formal System}
+A formal system $F$ is a quadrupel F (
+\end{frame}
+
+\begin{frame}
+\frametitle{Formal System: Arithmetics}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorem}
+"Any consistent formal system F within which a certain amount of elementary arithmetic can be carried out is incomplete; i.e., there are statements of the language of F which can neither be proved nor disproved in F."
+\end{frame}
+
+\begin{frame}
+\frametitle{Gödel-Numbering}
+\subsection{Gödel-Numbering}
+\center
+\begin{figure}[h]
+\begin{tikzpicture}[scale=1.3]
+\node (A) at (-2,0){$6 * 7 = 42$};
+\node (B) at (-2, -1){56 3 57 0 92};
+
+\node (E) at (-4,0){$1 + 1 = 2$};
+\node (F) at (-4,-1){51 1 51 0 52};
+
+\node (C) at (0,0){$3 + 1 = 2$};
+\node (D) at (0,-1){53 1 51 0 2};
+
+\draw[->] (A) edge (B);
+\draw[->] (C) edge (D);
+\draw[->] (E) edge (F);
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Gödel Statement}
+\subsection{The Gödel-Statement}
+\center
+\begin{figure}[h]
+\begin{tikzpicture}[scale=1.3]
+\node (A) at (0,0){"This statement cannot be proved by the Axioms."};
+\node (B) at (-2, -1){False};
+\node (C) at (2,-1){True};
+
+\draw[->] (A) edge (B);
+\draw[->] (A) edge (C);
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Gödel Statement}
+\center
+\begin{figure}[h]
+\begin{tikzpicture}[scale=1.3]
+\node (A) at (0,0){"This statement cannot be proved by the Axioms."};
+\node (B) at (-2, -1){False};
+\node (C) at (2,-1){True};
+
+\node (D) at (-2, -2){This statement can be proved by the Axioms.};
+
+\draw[->] (A) edge (B);
+\draw[->] (A) edge (C);
+
+\draw[->] (B) edge (D);
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Gödel Statement}
+\center
+\begin{figure}[h]
+\begin{tikzpicture}[scale=1.3]
+\node (A) at (0,0){"This statement cannot be proved by the Axioms."};
+\node (B) at (-2, -1){False};
+\node (C) at (2,-1){True};
+
+\node (D) at (-2, -2){This statement can be proved by the Axioms.};
+
+\draw[->] (A) edge (B);
+\draw[->] (A) edge (C);
+
+\draw[->] (B) edge (D);
+
+\draw[->] (D) edge[bend right=15] (C);
+
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\section{Second Icompleteness Theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Theorem}
+\center
+
+"No consistent axiomatic system which includes elementary arithmetic can prove its own consistency."
+\end{frame}
+
+\begin{frame}
+\section{Inpact}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\Huge
+$ 2+2=4.001 $ ?
+\end{center}
+\end{frame}
+
+\begin{frame}
+\textit{"God exists because math is consistent, and the devil exists because we cannot prove it."} Andre Weil (translated)
+\end{frame}
+
+\begin{frame}
+\tiny
+\frametitle{Picture-sources}
+\begin{itemize}
+\item \url{https://upload.wikimedia.org/wikipedia/en/4/42/Kurt_g\%C3\%B6del.jpg}
+\item \url{https://link.springer.com/article/10.1007\%2FBF01700692}
+\item \url{https://www.clipartsgram.com/image/36212557-little-pigs-brick-house-colouring-pages-ssjond-clipart.png}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Sources}
+\begin{itemize}
+\item \url{https://cs.nyu.edu/pipermail/fom/2010-March/014500.html}
+\item \url{http://www.tagesspiegel.de/wissen/mathematik-das-genie-und-der-wahnsinn/1139308.html}
+\item \url{http://www.mathe.tu-freiberg.de/~hebisch/cafe/zitate.html}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\end{document}

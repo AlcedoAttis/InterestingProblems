@@ -1,0 +1,108 @@
+
+\documentclass[a5paper, 8pt]{scrartcl} % pt macht schriftgroesse
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{url}
+\usepackage[margin = 2cm]{geometry}
+\usepackage{titling}
+
+\pagenumbering{gobble} % macht seitennummerierung aus
+\setlength{\parindent}{0pt}
+
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper, landscape]
+
+\begin{document}
+
+\title{The Hardness of ``Lemmings''}
+\subtitle{Another NP-complete Game}
+\author{Philip Geißler}
+\date{May 14, 2018}
+
+\maketitle
+\center
+
+\begin{Large}
+Intentions
+\end{Large}\\\vspace*{-0.25cm}
+\hrulefill\\\vspace*{0.3cm}
+\begin{minipage}{0.93\textwidth}
+The complexity of ``Lemmings'' is a topic in the research of games, more specifically computer games. And although it is a relatively simple game, it was still proposed as a training for artificial intelligence because of its relative difficulty despite of the simple rules and levels. Therefor, knowledge of the complexity of ``Lemmings'' would be quite helpful in determining if this would be a useful problem that an algorithm could be trained on.
+\end{minipage}
+
+\vspace*{0.5cm}
+\begin{Large}
+Propositions
+\end{Large}\\\vspace*{-0.25cm}
+\hrulefill\\\vspace*{0.3cm}
+\begin{minipage}{0.93\textwidth}
+\begin{itemize}
+\item ``Lemmings'' can be valuable for training an artificial intelligence as it proves to be hard enough to defy brute forcing.
+\item A reduction from a ``Lemmings'' level to 3SAT is possible
+\item Solutions for some levels can only be found in exponential time. (if~\emph{P}$\neq$\emph{NP})
+\item Solutions for all levels can be checked in polynoial time.
+\item[$\hookrightarrow$] ``Lemmings'' is \emph{NP}-Complete.
+\item The above holds true for levels with only 1 Lemming, too.
+\end{itemize}
+\end{minipage}
+
+\vspace*{0.5cm}
+\begin{Large}
+Sources
+\end{Large}\\\vspace*{-0.25cm}
+\hrulefill\\\vspace*{0.3cm}
+\begin{minipage}{0.93\textwidth}
+All information in this Handout as well as all information in the presentation regarding the proofs is taken from:\\
+Cormode, Graham, The Hardness of the Lemmings Game, or
+Oh no, more NP-Completeness Proofs, 01.2004\\
+\url{bit.ly/2wzy9QY}
+\end{minipage}
+\newpage
+
+\maketitle
+\center
+
+\begin{Large}
+Intentions
+\end{Large}\\\vspace*{-0.25cm}
+\hrulefill\\\vspace*{0.3cm}
+\begin{minipage}{0.93\textwidth}
+The complexity of ``Lemmings'' is a topic in the research of games, more specifically computer games. And although it is a relatively simple game, it was still proposed as a training for artificial intelligence because of its relative difficulty despite of the simple rules and levels. Therefor, knowledge of the complexity of ``Lemmings'' would be quite helpful in determining if this would be a useful problem that an algorithm could be trained on.
+\end{minipage}
+
+\vspace*{0.5cm}
+\begin{Large}
+Propositions
+\end{Large}\\\vspace*{-0.25cm}
+\hrulefill\\\vspace*{0.3cm}
+\begin{minipage}{0.93\textwidth}
+\begin{itemize}
+\item ``Lemmings'' can be valuable for training an artificial intelligence as it proves to be hard enough to defy brute forcing.
+\item A reduction from a ``Lemmings'' level to 3SAT is possible
+\item Solutions for some levels can only be found in exponential time. (if~\emph{P}$\neq$\emph{NP})
+\item Solutions for all levels can be checked in polynoial time.
+\item[$\hookrightarrow$] ``Lemmings'' is \emph{NP}-Complete.
+\item The above holds true for levels with only 1 Lemming, too.
+\end{itemize}
+\end{minipage}
+
+\vspace*{0.5cm}
+\begin{Large}
+Sources
+\end{Large}\\\vspace*{-0.25cm}
+\hrulefill\\\vspace*{0.3cm}
+\begin{minipage}{0.93\textwidth}
+All information in this Handout as well as all information in the presentation regarding the proofs is taken from:\\
+Cormode, Graham, The Hardness of the Lemmings Game, or
+Oh no, more NP-Completeness Proofs, 01.2004\\
+\url{bit.ly/2wzy9QY}
+\end{minipage}
+
+
+
+
+
+
+\end{document}

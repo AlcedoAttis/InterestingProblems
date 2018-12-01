@@ -1,0 +1,242 @@
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{green}{rgb}{0,1,0}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{yellow}{rgb}{1,1,0}
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{purple}{rgb}{0.75,0,0.25}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{brown}{rgb}{0.75,0.5,0.25}
+\definecolor{pink}{rgb}{1,0.75,0.75}
+\definecolor{violet}{rgb}{0.5,0,0.5}
+\definecolor{darkgray}{rgb}{0.25,0.25,0.25}
+\definecolor{lightgray}{rgb}{0.75,0.75,0.75}
+\definecolor{lime}{rgb}{0.75,1,0}
+\definecolor{teal}{rgb}{0,0.5,0.5}
+\definecolor{cyan}{rgb}{0,1,1}
+\definecolor{magenta}{rgb}{1,0,1}
+\definecolor{olive}{rgb}{0.5,0.5,0}
+\definecolor{gold}{rgb}{1,0.843,0}
+\definecolor{navy}{rgb}{0,0,0.502}
+\definecolor{seagreen}{rgb}{0.18,0.545,0.341}
+\definecolor{turquoise}{rgb}{0.251,0.878,0.816}
+\definecolor{darkblue}{rgb}{0,0,0.545}
+\definecolor{darkcyan}{rgb}{0,0.545,0.545}
+\definecolor{darkgreen}{rgb}{0,0.392,0}
+\definecolor{darkmagenta}{rgb}{0.545,0,0.545}
+\definecolor{darkorange}{rgb}{1,0.549,0}
+\definecolor{darkred}{rgb}{0.545,0,0}
+\definecolor{lightblue}{rgb}{0.678,0.847,0.902}
+\definecolor{lightcyan}{rgb}{0.878,1,1}
+\definecolor{lightgreen}{rgb}{0.565,0.933,0.565}
+\definecolor{lightyellow}{rgb}{1,1,0.878}
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{white}{rgb}{1,1,1}
+\begin{tikzpicture}[ipe import, scale=0.6, every node/.style={transform shape}]
+  \draw[shift={(144, 280)}, yscale=0.7619, very thick, ->]
+    (0, 0)
+     -- (0, 336);
+  \draw[shift={(128, 368)}, xscale=0.9167, very thick, ->]
+    (0, 0)
+     -- (384, 0);
+  \filldraw[shift={(280, 296)}, scale=0.5, thick, fill=darkgray]
+    (0, 0)
+     arc[start angle=89.9999, end angle=269.9999, x radius=-16, y radius=-56]
+     -- (-16, 112)
+     { [rotate=0.0001] arc[start angle=89.9996, end angle=269.9996, x radius=16, y radius=56] }
+     -- cycle;
+  \filldraw[thick, fill=darkorange]
+    (272, 324) ellipse[x radius=8, y radius=28];
+  \draw[shift={(272, 308)}, scale=0.5, thick, ->]
+    (0, 0)
+     -- (0, 64);
+  \filldraw[shift={(380, 384)}, scale=0.5, thick, fill=darkgray]
+    (0, 0)
+     arc[start angle=89.9999, end angle=269.9999, x radius=-16, y radius=-56]
+     -- (-16, 112)
+     { [rotate=0.0001] arc[start angle=89.9996, end angle=269.9996, x radius=16, y radius=56] }
+     -- cycle;
+  \filldraw[thick, fill=darkorange]
+    (372, 412) ellipse[x radius=8, y radius=28];
+  \draw[shift={(372, 396)}, scale=0.5, thick, ->]
+    (0, 0)
+     -- (0, 64);
+  \filldraw[shift={(380, 296)}, scale=0.5, thick, fill=darkgray]
+    (0, 0)
+     arc[start angle=89.9999, end angle=269.9999, x radius=-16, y radius=-56]
+     -- (-16, 112)
+     { [rotate=0.0001] arc[start angle=89.9996, end angle=269.9996, x radius=16, y radius=56] }
+     -- cycle;
+  \filldraw[thick, fill=darkorange]
+    (372, 324) ellipse[x radius=8, y radius=28];
+  \draw[thick, ->]
+    (368, 324)
+     -- (376, 324)
+     -- (368, 324)
+     -- (376, 324);
+  \filldraw[shift={(380, 456)}, scale=0.5, thick, fill=darkgray]
+    (0, 0)
+     arc[start angle=89.9999, end angle=269.9999, x radius=-16, y radius=-56]
+     -- (-16, 112)
+     { [rotate=0.0001] arc[start angle=89.9996, end angle=269.9996, x radius=16, y radius=56] }
+     -- cycle;
+  \filldraw[thick, fill=darkorange]
+    (372, 484) ellipse[x radius=8, y radius=28];
+  \draw[thick, ->]
+    (368, 484)
+     -- (376, 484)
+     -- (368, 484)
+     -- (376, 484);
+  \draw[shift={(300, 484)}, xscale=0.8824, semithick, ->]
+    (0, 0)
+     -- (68, 0);
+  \draw[shift={(300, 412)}, xscale=0.8824, semithick, ->]
+    (0, 0)
+     -- (68, 0);
+  \draw[semithick, ->]
+    (392, 484)
+     -- (432, 484);
+  \draw[semithick, ->]
+    (392, 412)
+     -- (432, 412);
+  \draw[shift={(212, 324)}, xscale=0.8571, semithick, ->]
+    (0, 0)
+     -- (56, 0);
+  \draw[semithick, ->]
+    (292, 324)
+     -- (360, 324);
+  \draw[semithick, ->]
+    (392, 324)
+     -- (432, 324);
+  \node[ipe node, font=\large]
+     at (152, 528) {Raum};
+  \node[ipe node, font=\Huge]
+     at (152, 508) {X};
+  \node[ipe node, font=\Huge]
+     at (464, 372) {T};
+  \node[ipe node, font=\LARGE]
+     at (432, 372) {Zeit};
+  \draw[shift={(256, 484)}, xscale=0.5, gold, very thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(256, 484)}, xscale=0.5, darkorange, thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(168, 484)}, xscale=0.5, gold, very thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(168, 484)}, xscale=0.5, darkorange, thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(168, 412)}, xscale=0.5, gold, very thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(168, 412)}, xscale=0.5, darkorange, thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(256, 412)}, xscale=0.5, gold, very thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(256, 412)}, xscale=0.5, darkorange, thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(168, 324)}, xscale=0.5, gold, very thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[shift={(168, 324)}, xscale=0.5, darkorange, thick]
+    (0, 0)
+     .. controls (4, 0) and (8, 4) .. (11.3333, 2)
+     .. controls (14.6667, 0) and (17.3333, -8) .. (20, -5.3333)
+     .. controls (22.6667, -2.6667) and (25.3333, 10.6667) .. (28, 8)
+     .. controls (30.6667, 5.3333) and (33.3333, -13.3333) .. (36, -12)
+     .. controls (38.6667, -10.6667) and (41.3333, 10.6667) .. (44, 12)
+     .. controls (46.6667, 13.3333) and (49.3333, -5.3333) .. (52, -8)
+     .. controls (54.6667, -10.6667) and (57.3333, 2.6667) .. (60, 5.3333)
+     .. controls (62.6667, 8) and (65.3333, 0) .. (68.6667, -2)
+     .. controls (72, -4) and (76, 0) .. (80, 0);
+  \draw[thick, ->]
+    (212, 484)
+     .. controls (216, 484) and (218, 488) .. (221, 472)
+     .. controls (224, 456) and (228, 420) .. (232, 420)
+     .. controls (236, 420) and (240, 456) .. (243, 472)
+     .. controls (246, 488) and (248, 484) .. (252, 484);
+  \draw[thick, ->]
+    (212, 412)
+     .. controls (216, 412) and (218, 408) .. (221, 424)
+     .. controls (224, 440) and (228, 476) .. (232, 476)
+     .. controls (236, 476) and (240, 440) .. (243, 424)
+     .. controls (246, 408) and (248, 412) .. (252, 412);
+  \node[ipe node, anchor=west, font=\LARGE]
+     at (244, 448) {Verschr\"ankung};
+\end{tikzpicture}
