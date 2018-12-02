@@ -21,21 +21,39 @@
 }
 
 \begin{document}
-\title{Problem \rom{1} - Commutative Exponentiation}
-\author{Philip Gei\ss{}ler \hspace{5cm} \textit{3 Points}}
+\title{Problem \rom{2} - Implicit Function}
+\author{Philip Gei\ss{}ler \hspace{5cm} \textit{{4} Points}}
 \date{}
 \maketitle
 \vspace*{-.9cm}
 
 \begin{align*}
-p^q &= q^p & p,q\in\mathbb{R}^+
+\varphi_\mathbb{Q} :&\mathbb{~~Q} \longmapsto \mathbb{Q} &\varphi_\mathbb{Q}(p)\cdot\varphi_\mathbb{Q}(q) &= \varphi_\mathbb{Q}(p+q)\\
+\varphi_\mathbb{R} :&\mathbb{~~R} \longmapsto \mathbb{R} &\varphi_\mathbb{R}(p)\cdot\varphi_\mathbb{R}(q) &= \varphi_\mathbb{R}(p+q)
 \end{align*}
-Find the functions $p(q)$ which satisfy the given equation. Where $(p,q)$ do they intersect?
+~~~~~~~Which function do both functions $\varphi(x)$ represent? Are they continuous? 
 \hrule
 \vspace*{9mm}
-dnlfvnjfrkj
-
+Let's start with $\varphi_\mathbb{Q}(c), c\in\mathbb{Q}$:
+\begin{align*}
+\varphi(0) =&~ \varphi(0+0) = \varphi(0) \cdot \varphi(0) = \varphi(0)^2 \\
+\Longrightarrow \varphi(0) =&~ \text{id}_{(\mathbb{R}, \cdot)} = 1\\
+&~(\text{ or } \varphi(c) = 0 \Longrightarrow \varphi(q) = 0 ~~\forall b\in\mathbb{Q}\text{\,or\,}\forall b\in\mathbb{R})\\~\\
+\varphi(c) =&~ \varphi\left({\frac{1}{n}\cdot c}\right) \cdot \varphi\left({\frac{n-1}{n}\cdot c}\right) & n\in \mathbb{N} \\
+=&~\overbrace{\varphi\left({\frac{1}{n}\cdot c}\right) \cdot \varphi\left({\frac{1}{n}\cdot c}\right)\cdots \varphi\left({\frac{1}{n}\cdot c}\right)}^{n \text{ times}} = \varphi\left({\frac{c}{n}}\right)^n & n\in \mathbb{N}\\
+\varphi(cm) =&~ \varphi\left({c}\right)^m \Longrightarrow \varphi(c) = \varphi\left({cm}\right)^\frac{1}{m} & m\in \mathbb{N}^+\\
+\varphi\left(c\right) =&~ \varphi\left({\frac{m}{n}\cdot c}\right)^\frac{n}{m} & n\in \mathbb{N},m\in \mathbb{N}^+\\
+\Longrightarrow \varphi\left(\frac{m}{n}\cdot c\right) =&~ \varphi\left({c}\right)^\frac{m}{n} = \varphi\left(q c\right) = \varphi\left({c}\right)^q & q\in \mathbb{Q}^+,~ n\in \mathbb{N},m\in \mathbb{N}^+\\~\\
+\varphi(0) =&~ \varphi((q-q)c) = \varphi(qc) \cdot \varphi(-qc)\\
+ =&~ \varphi(c)^q \cdot \varphi(-qc) = 1 \\
+\Longrightarrow \varphi(-qc) =&~ \frac{1}{ \varphi(c)^q} =  \varphi(c)^{-q} & \Longrightarrow q\in \mathbb{Q}\\~\\
+\varphi(1) \coloneqq&~ b & b \in \mathbb{?}\\
+\varphi(q) =&~ \varphi(1)^q = b^q & \Longrightarrow b \in \mathbb{Q}^+ \text{ so } b^q \in \mathbb{Q} \\~\\
+\Longrightarrow \varphi_\mathbb{Q}(q) =&~ b^q ~~\forall b\in\mathbb{Q}^+ ~\Longrightarrow  \varphi_\mathbb{Q}(q) \text{ is}\text{ continuous}\\
+\Longrightarrow \varphi_\mathbb{R}(q) =&~ b^q ~~\forall q\in\mathbb{Q}~\forall b\in\mathbb{R}^+ & \text{analogous}
+\end{align*}
+So can we extend the definition of $\varphi_\mathbb{Q}$ to $\varphi_\mathbb{R}$? No!
+\begin{align*}
+\varphi_\mathbb{R}(q) &\coloneqq \left\{\begin{array}{rl}2^{y\pi}	 & \text{if } q = x + y\pi \mid x,y\in\mathbb{Q}\\ 1& \text{else}\end{array}\right.
+\end{align*}
 \end{document}
-
-
- 
