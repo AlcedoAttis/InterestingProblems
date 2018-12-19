@@ -1,6 +1,6 @@
 \documentclass[12pt, a4paper]{article}
  
-\usepackage[top=0.5in, bottom=0.9in, left=0.95in, right=0.95in]{geometry} 
+\usepackage[top=0.3in, bottom=0.9in, left=0.95in, right=0.95in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,mathtools}
 \usepackage{listings}
 \usepackage{graphicx}
@@ -8,16 +8,17 @@
 \pagenumbering{gobble}
 
 \begin{document}
-\title{Proof of the Rightfulness of $\varphi_p(x)$ as a Counterexample}
+\title{Proof of the Rightfulness of $\varphi_p(q)$ as a Counterexample}
 \author{}
 \date{}
 \maketitle
 \vspace*{-1.9cm}
 \centering
+Philip Gei\ss{}ler\\
 \begin{align*}
 \varphi_p(q) \coloneqq \left\{\begin{array}{rl}2^{y} & \text{if } q = x + y\pi \mid x,y\in\mathbb{Q}\\ 0& \text{else}\end{array}\right. & & \varphi_p(q_1)\cdot\varphi_p(q_2) = \varphi_p(q_1+q_2)
 \end{align*}\\\vspace*{7mm}
-\begin{Large}Part \rom{1}: $\varphi_p(x)$ is a well-defined function\end{Large}
+\begin{Large}Part \rom{1}: $\varphi_p(q)$ is a well-defined function\end{Large}
 \begin{align*}
 \text{to be shown:~~~~}&~\forall q_1,q_2\in \mathbb{R},~ x_1,y_1,x_2,y_2,x_s,y_s\in\mathbb{Q}\\
 \left.\begin{array}{rl}2^{y} & \text{if } q_1+q_2 = x_s + y_s\pi\\ 0& \text{else}\end{array}\right\} =& \left\{\begin{array}{rl}2^{y} & \text{if } q_1 = x_1 + y_1\pi \\ 0& \text{else}\end{array}\right.\cdot\left\{\begin{array}{rl}2^{y} & \text{if } q_2 = x_2 + y_2\pi \\ 0& \text{else}\end{array}\right.\\
@@ -25,29 +26,29 @@
 \end{align*}\vspace*{-15mm}
 \begin{align*}
 & & \mathllap{q_1,q_2\in \mathbb{R},~ x_1,y_1,x_2,y_2\in\mathbb{Q}}\\
-\text{Case \rom{1}:~~} & q_1 = x_1 + y_1\pi ~\wedge~ q_2 = x_2 + y_2\pi & ~~\mathllap{i_1,i_2 \neq x_i+y_i\pi ~~\forall x_i,y_i\in\mathbb{Q}}\\
+\text{Case \rom{1}:~~} & q_1 = x_1 + y_1\pi \,\wedge\, q_2 = x_2 + y_2\pi & ~~\mathllap{i_1,i_2 \neq x_i+y_i\pi ~~\forall x_i,y_i\in\mathbb{Q}}\\
 & q_1 + q_2 = (x_1+x_2) + (y_1+y_2)\pi\\
 \Rightarrow~ & \varphi_p(q_1 + q_2) = 2^{y_1+y_2} = 2^{y_1} \cdot 2^{y_2} =\varphi_p(q_1) \cdot \varphi_p(q_2)\\
-\text{Case \rom{2}:~~} & q_1 \neq x_1 + y_1\pi ~~\wedge~~ q_2 = x_2 + y_2\pi \vee q_1 = x_1 + y_1\pi ~\wedge~ q_2 \neq x_2 + y_2\pi\\
-& q_1 + q_2 = x_a + y_a\pi + i_1\\
+\text{Case \rom{2}:~~} & q_1 \neq x_1 + y_1\pi \,\wedge\, q_2 = x_2 + y_2\pi \,\vee\, q_1 = x_1 + y_1\pi \,\wedge\, q_2 \neq x_2 + y_2\pi\\
+& q_1 + q_2 = x_a + y_a\pi + i_a = i_a'\\
 \Rightarrow~ & \varphi_p(q_1 + q_2) = 0 = 0 \cdot 2^{y_a} =\varphi_p(q_1) \cdot \varphi_p(q_2)\\
-\text{Case \rom{3}:~~} & q_1 = x_1 + y_1\pi ~\wedge~ q_2 = x_2 + y_2\pi \\
+\text{Case \rom{3}:~~} & q_1 \neq x_1 + y_1\pi \,\wedge\, q_2 \neq x_2 + y_2\pi \\
 & q_1 + q_2 = i_1 + i_2\\
 \Rightarrow~ & \varphi_p(q_1 + q_2) = 0 = 0 \cdot 0 =\varphi_p(q_1) \cdot \varphi_p(q_2)\vspace*{20mm} \\
 \Longrightarrow~ & \varphi_p(q_1 + q_2) = \varphi_p(q_1) \cdot \varphi_p(q_2) \phantom{a^{b^{c^{d^e}}}}\\
 \end{align*}
 \vspace*{0mm}\\
-\begin{Large}Part \rom{2}: $\varphi_p(x)$ is not continuous\end{Large}
+\begin{Large}Part \rom{2}: $\varphi_p(q)$ is not continuous\end{Large}
 \begin{align*}
 \text{continuity}&\Longleftrightarrow \forall x_0\in\mathbb{R} ~\forall \varepsilon>0 ~\exists\omega>0 ~\forall x\in \mathbb{R}    : |x-x_0|<\omega \Longrightarrow |\varphi_p(x)-\varphi_p(x_0)| < \varepsilon\\~\\
- & \hspace*{-2mm}\Longrightarrow~\exists x_0\in\mathbb{R} ~\exists \varepsilon>0 ~\nexists \omega>0 ~\forall x\in \mathbb{R} : |x-x_0|<\omega \Longrightarrow |\varphi_p(x)-\varphi_p(x_0)| < \varepsilon\\
+ & \hspace*{-2.5mm}\Longrightarrow~\exists x_0\in\mathbb{R} ~\exists \varepsilon>0 ~\nexists \omega>0 ~\forall x\in \mathbb{R} : |x-x_0|<\omega \Longrightarrow |\varphi_p(x)-\varphi_p(x_0)| < \varepsilon\\
 & \Leftrightarrow  ~\exists x_0\in\mathbb{R} ~\exists \varepsilon>0 ~\forall \omega>0 ~\exists x\in \mathbb{R} : |x-x_0|<\omega \Longrightarrow |\varphi_p(x)-\varphi_p(x_0)| \geqslant \varepsilon\\
 & \Leftrightarrow ~\text{noncontinuity}\\~\\
 &\hspace*{-0.5cm} \varepsilon_0 \coloneqq 0.17491 & \mathllap{\text{(because }0.17491<1)}\\[-3mm]
-&\hspace*{-0.5cm} x_0 \coloneqq \pi, ~~x \coloneqq \lim_{n\rightarrow\infty}\frac{\lfloor{24^n\pi}\rfloor}{\phantom{\lceil}{24^n}\phantom{\pi\rceil}} = q \in \mathbb{Q}, ~~\forall\omega>0: |x-\pi|<\omega & \mathllap{\text{(because }24\gg1)}\\
-&\hspace*{-0.5cm} \varphi_p(\pi)=2, ~~\varphi_p(q)=1 \hspace{17.5mm}\Longrightarrow \forall\omega>0: |\varphi_p(x)-\varphi_p(x_0)| = 1 > \varepsilon_0
+&\hspace*{-0.5cm} x_0 \coloneqq \pi, ~~x \coloneqq \lim_{n\rightarrow\infty}\frac{\lfloor{24^n\pi}\rfloor}{\phantom{\lceil}{24^n}\phantom{\pi\rceil}} = q \in \mathbb{Q}, ~~\forall\omega>0: |q-\pi|<\omega & \mathllap{\text{(because }24\gg1)}\\
+&\hspace*{-0.5cm} \varphi_p(\pi)=2, ~~\varphi_p(q)=1 \hspace{17.5mm}\Longrightarrow \forall\omega>0: |\varphi_p(qb)-\varphi_p(x_0)| = 1 > \varepsilon_0
 \end{align*}\\~\\~\\
-\begin{Large}$\Longrightarrow \varphi_p(x)$ is a noncontinuous function\end{Large}
+\begin{Large}$\Longrightarrow \varphi_p(q)$ is a noncontinuous function\end{Large}
 \end{document}
 
 

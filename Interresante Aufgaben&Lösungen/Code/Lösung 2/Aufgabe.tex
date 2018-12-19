@@ -38,8 +38,8 @@ Let's start with $\varphi_\mathbb{Q}(c), c\in\mathbb{Q}$:
 \begin{align*}
 \varphi(0) =&~ \varphi(0+0) = \varphi(0) \cdot \varphi(0) = \varphi(0)^2 \\
 \Longrightarrow \varphi(0) =&~ \text{id}_{(\mathbb{R}, \cdot)} = 1\\
-&~(\text{ or } \varphi(c) = 0 \Longrightarrow \varphi(q) = 0 ~~\forall b\in\mathbb{Q}\text{\,or\,}\forall b\in\mathbb{R})\\~\\
-\varphi(c) =&~ \varphi\left({\frac{1}{n}\cdot c}\right) \cdot \varphi\left({\frac{n-1}{n}\cdot c}\right) & n\in \mathbb{N} \\
+&~(\text{ or } \varphi(c) = 0 \Longrightarrow \varphi(q) = 0 ~~\forall b\in\mathbb{Q}~)\\~\\
+\varphi(c) =&~ \varphi\left({\frac{1}{n}\cdot c}\right) \cdot \varphi\left({\frac{n-1}{n}\cdot c}\right) = \dots & n\in \mathbb{N} \\
 =&~\overbrace{\varphi\left({\frac{1}{n}\cdot c}\right) \cdot \varphi\left({\frac{1}{n}\cdot c}\right)\cdots \varphi\left({\frac{1}{n}\cdot c}\right)}^{n \text{ times}} = \varphi\left({\frac{c}{n}}\right)^n & n\in \mathbb{N}\\
 \varphi(cm) =&~ \varphi\left({c}\right)^m \Longrightarrow \varphi(c) = \varphi\left({cm}\right)^\frac{1}{m} & m\in \mathbb{N}^+\\
 \varphi\left(c\right) =&~ \varphi\left({\frac{m}{n}\cdot c}\right)^\frac{n}{m} & n\in \mathbb{N},m\in \mathbb{N}^+\\
@@ -54,6 +54,6 @@ Let's start with $\varphi_\mathbb{Q}(c), c\in\mathbb{Q}$:
 \end{align*}
 So can we extend the definition of $\varphi_\mathbb{Q}$ to $\varphi_\mathbb{R}$? No!
 \begin{align*}
-\varphi_\mathbb{R}(q) &\coloneqq \left\{\begin{array}{rl}2^{y\pi}	 & \text{if } q = x + y\pi \mid x,y\in\mathbb{Q}\\ 1& \text{else}\end{array}\right.
+\varphi_\mathbb{R}(q) &\coloneqq \left\{\begin{array}{rl}2^{y\pi}	 & \text{if } q = x + y\pi \mid x,y\in\mathbb{Q}\\ 0& \text{else}\end{array}\right.
 \end{align*}
 \end{document}
