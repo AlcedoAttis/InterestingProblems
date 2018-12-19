@@ -1,6 +1,6 @@
 \documentclass[12pt, a4paper]{article}
  
-\usepackage[top=0.5in, bottom=0.9in, left=0.95in, right=0.95in]{geometry} 
+\usepackage[top=0.in, bottom=0.9in, left=0.95in, right=0.95in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,mathtools}
 \usepackage{listings}
 \usepackage{graphicx}
@@ -21,21 +21,40 @@
 }
 
 \begin{document}
-\title{Problem \rom{1} - Commutative Exponentiation}
-\author{Philip Gei\ss{}ler \hspace{5cm} \textit{3 Points}}
+\title{Problem \rom{3} - A Stack of Sums}
+\author{Philip Gei\ss{}ler \hspace{5cm} \textit{5 Points}}
 \date{}
 \maketitle
 \vspace*{-.9cm}
 
 \begin{align*}
-p^q &= q^p & p,q\in\mathbb{R}^+
+\mathcal{S}_{n}^\infty \coloneqq {\text{\hspace{-4.9mm}}\sum\limits^{\infty}_{\phantom{...}\begin{smallmatrix*}x_i\!&=&\!x_{i-1}\\x_1\!&=&\!0\hfill\end{smallmatrix*}}}^{\text{\hspace{-5mm}}\sum\limits^{n}_{i=1}}\hspace{1mm}\frac{1}{2^{x_i}} \coloneqq \sum^{\infty}_{x_1 = 0}\sum^{\infty}_{x_2 = x_1}\cdots\hspace{-2.3mm}\sum^{\infty}_{x_n = x_{n-1}}\frac{1}{2^{x_n}}
 \end{align*}
-Find the functions $p(q)$ which satisfy the given equation. Where $(p,q)$ do they intersect?
+What are the values of $\mathcal{S}_{1}^\infty$, $\mathcal{S}_{2}^\infty$ and $\mathcal{S}_{3}^\infty$? Does $\mathcal{S}_{n}^\infty$ converge for all $n\in\mathbb{N}$? If so, can you give a general answer for $\mathcal{S}_{n}^\infty$?
 \hrule
 \vspace*{9mm}
-dnlfvnjfrkj
+\begin{align*}
+\mathcal{S}_{1}^\infty &= \sum^{\infty}_{x_1 = 0} \frac{1}{2^{x_1}} = 2^n \sum^{\infty}_{x = 0} \frac{1}{2^{x}\cdot 2^n} = 2^n \sum^{\infty}_{x = 0} \frac{1}{2^{x+n}} = 2^n \sum^{\infty}_{x = n} \frac{1}{2^{x}} & \mathllap{\forall n\in\mathbb{N}}\\
+&= \sum^{\infty}_{x_1 = 0} \frac{1}{2^{x_1}} = 1+ \sum^{\infty}_{x_1 = 1} \frac{1}{2^{x_1}} = 2 \cdot\sum^{\infty}_{x_1 = 1} \frac{1}{2^{x_1}} \,\Rightarrow\, \sum^{\infty}_{x_1 = 1} \frac{1}{2^{x_1}} = 1 \,\Rightarrow\, \sum^{\infty}_{x_1 = 0} \frac{1}{2^{x_1}} = 2\cdot 1 = 2^1\\
+~\\
+\mathcal{S}_{2}^\infty &= \sum^{\infty}_{x_1 = 0}\sum^{\infty}_{x_2 = x_1} \frac{1}{2^{x_2}} = \sum^{\infty}_{x_1 = 0} \left(\frac{1}{2^{x_1}}  \sum^{\infty}_{x_2 = 0} \frac{1}{2^{x_2}} \right) = \sum^{\infty}_{x_1 = 0} \frac{1}{2^{x_1}} \cdot 2 = \sum^{\infty}_{x_1 = 0}\frac{1}{2^{x_1-1}} = \frac{1}{2^{-1}}\sum^{\infty}_{x_1 = 0}\frac{1}{2^{x_1}} \\
+&= 2^1 \cdot 2 = 4 = 2^2 \\
+~\\
+\mathcal{S}_{3}^\infty &= \sum^{\infty}_{x_1 = 0}\sum^{\infty}_{x_2 = x_1}\sum^{\infty}_{x_3 = x_2} \frac{1}{2^{x_3}} = \sum^{\infty}_{x_1 = 0}\sum^{\infty}_{x_2 = x_1} \frac{1}{2^{x_2-1}} = \frac{1}{2^{-1}}\sum^{\infty}_{x_1 = 0}\sum^{\infty}_{x_2 = x_1} \frac{1}{2^{x_2}}\\
+&= 2^1\sum^{\infty}_{x_1 = 0} \frac{1}{2^{x_1-1}} = 2^2\sum^{\infty}_{x_1 = 0} \frac{1}{2^{x_1}} = 2^2\cdot 2 = 8 = 2^3\\
+~\\~\\
+\mathcal{S}_{n}^\infty &= \sum^{\infty}_{x_1 = 0}\cdots\cdot\cdot\hspace{-0.65cm}\sum^{\infty}_{x_{n-1} = x_{n-2~~~}}\hspace{-0.7cm}\sum^{\infty}_{~~~x_n = x_{n-1}}\hspace{-0.35cm}\frac{1}{2^{x_n}} = \sum^{\infty}_{x_1 = 0}\cdots\cdot\cdot\hspace{-0.45cm}\sum^{\infty}_{x_{n-1} = x_{n-2}}\hspace{-0.35cm}\frac{1}{2^{x_{n-1}-1}} = 2^1\sum^{\infty}_{x_1 = 0}\cdots\cdot\cdot\hspace{-0.45cm}\sum^{\infty}_{x_{n-1} = x_{n-2}}\hspace{-0.35cm}\frac{1}{2^{x_{n-1}}}\\
+&= 2^1 \cdot \mathcal{S}_{n-1}^\infty
+\end{align*}
+\begin{align*}
+\mathcal{S}_{1}^\infty &= 2^1\\
+\mathcal{S}_{n}^\infty &= 2^1 \cdot \mathcal{S}_{n-1}^\infty\\
+\Longrightarrow \mathcal{S}_{n}^\infty &= 2^1 \cdot \mathcal{S}_{n-1}^\infty = 2^1\cdot2^1 \cdot \mathcal{S}_{n-2}^\infty = \cdots = \overbrace{2^1\cdot2^1\cdots 2^1}^{n-1 \text{ times}} \cdot \,\mathcal{S}_{1}^\infty = 2^{n-1}\cdot2^1 = 2^n\\
+\Longrightarrow \mathcal{S}_{n}^\infty &\text{ coverges for every $n\in \mathbb{N}$, whereas } \lim_{n\rightarrow\infty} \mathcal{S}_{n}^\infty \text{ diverges.} 
+\end{align*}
 
 \end{document}
+
 
 
  

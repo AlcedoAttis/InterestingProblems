@@ -1,1 +1,68 @@
+\documentclass[12pt, a4paper]{article}
+ 
+\usepackage[top=0.in, bottom=0.9in, left=0.95in, right=0.95in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{harpoon}
+
+\newcommand{\vect}[1]{\overrightharp{\ensuremath{#1}}}
+\newcommand{\field}[1]{\par\begin{large}{\vspace*{0.5cm}\noindent{}\textbf{#1}\vspace*{-1mm}}\end{large}}
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+%\newcommand{\problem}[2]{{\par\noindent{}\textit{Problem {\uppercase\expandafter{\romannumeral #1\relax}}.} #2}}
+\newenvironment{problem}[3]{{\par\vspace*{4.5mm}\noindent{}\textit{Problem {\uppercase\expandafter{\romannumeral #1\relax}}:} #2}\vspace*{-0.2cm}\hfill{\textit{{#3} Points.}}\\\hspace*{0.8cm}\hfill\begin{minipage}{\dimexpr\textwidth-1.3cm}}{\end{minipage}\hspace*{0.5cm}}
+% don't fucking ask! (im 4h into this and it __works__)
+ 
+\lstset{literate=
+  {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {ß}{{\ss}}1
+}
+
+\begin{document}
+\title{Problem \rom{4} - Mo Money Mo Bills}
+\author{Philip Gei\ss{}ler \hspace{5cm} \textit{3 Points}}
+\date{}
+\maketitle
+\vspace*{-.9cm}
+
+\begin{align*}
+\mathcal{P}_{n_0} &= \left\lbrace{\mathcal{S}\mid \mathcal{S}\subseteq \mathbb{N},~ \forall n\in\mathbb{N},~ n<n_0,~ \exists s_1,s_2.\dots,s_x \in \mathcal{S}: \textstyle\sum_{i=1}^xs_i=n}\right\rbrace
+\end{align*}\vspace*{-0.9cm}\begin{align*}
+\overline{\mathcal{P}}_{n_0} &= \min\{|\mathcal{S}| \mid \mathcal{S}\in\mathcal{P}_{n_0}\} &\mathcal{R}_x &= \lim_{{n_0}\rightarrow \infty} \frac{\overline{\mathcal{P}}_{n_0}}{n_0}
+\end{align*}
+You have a purse that can fit $x$ bills, but you want to be able to pay every possible integer amount of money in one go. Fortunately you are able to print every bill of integer value you want. What is the smallest ratio $\mathcal{R}_x$ for $x\in\mathbb{N}$ of new bills per possible payable amount of money you need to print if your spendings can be arbitrarily large?
+\hrule
+\vspace*{9mm}
+Case 1: $x = 1$
+\begin{center}
+In this case, to pay an integer amount, you need exactly that bill,\\
+so trivially $\mathcal{R}_1 = 1$.
+\end{center}
+
+Case 2: $x > 1$\\
+\begin{minipage}[t]{0.12\linewidth}
+~~
+\end{minipage}
+\begin{minipage}[t]{0.84\linewidth}
+Prime Number Theorem:
+Goldbach conjecture:
+\end{minipage}
+\begin{align*}
+%dummy section
+\end{align*}
+~~~~Subcase 2.1: $x = 2$
+\begin{align*}
+gg
+\end{align*}
+~~~~Subcase 2.2: $x > 2$
+\begin{center}
+
+\end{center}
+
+
+\end{document} 
+
+
  
